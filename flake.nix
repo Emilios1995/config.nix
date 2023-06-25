@@ -45,7 +45,7 @@
             # `home-manager` config
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.emilio = import ./home.nix;
+            home-manager.users.emilio = { imports = [./home]; };
           }
         ];
       };
