@@ -43,4 +43,6 @@ o.smartcase = true
 -- always show sign column (where numbers, folds, etc, are)
 signcolumn = 'yes'
 
+vim.cmd('colorscheme rose-pine')
+
 o.termguicolors = true

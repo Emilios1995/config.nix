@@ -30,6 +30,12 @@
    };
   };
 
+  /*
+  programs.wezterm = {
+    enable = true;
+  };
+  */
+
   programs.bat = {
     enable = true;
     config.theme = "Solarized (dark)";

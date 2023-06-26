@@ -8,6 +8,12 @@ with lib;
       :luafile ~/.config/nix/home/neovim/config/init.lua
     '';
 
+    plugins = with pkgs.vimPlugins; [
+      mini-nvim  
+      rose-pine
+      nvim-treesitter.withAllGrammars
+    ];
+
   };
 
   xdg.configFile.nvim = {

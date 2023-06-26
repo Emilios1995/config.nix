@@ -3,7 +3,7 @@
 
   inputs = {
     # Package sets
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;
 
     # Environment/system management
@@ -19,7 +19,7 @@
 
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, darwin, nixpkgs-stable, home-manager, ... }@inputs:
   let 
 
     inherit (darwin.lib) darwinSystem;
@@ -29,7 +29,7 @@
     nixpkgsConfig = {
       config = { allowUnfree = true; };
       overlays = attrValues self.overlays;
-    }; 
+    };
   in
   {
     darwinConfigurations = rec {
@@ -64,6 +64,13 @@
             inherit (nixpkgsConfig) config;
           };
         }; 
+
+        pkgs-stable = _: prev: {
+          pkgs-stable = import inputs.nixpkgs-stable {
+            inherit (prev.stdenv) system;
+            inherit (nixpkgsConfig) config;
+          };
+        };
       };
  };
 }
