@@ -12,6 +12,7 @@ with lib;
       mini-nvim  
       rose-pine
       nvim-treesitter.withAllGrammars
+      nvim-treesitter-textobjects
     ];
 
   };

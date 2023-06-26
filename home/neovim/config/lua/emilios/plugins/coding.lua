@@ -1,11 +1,29 @@
 require('mini.surround').setup()
 
--- vim.cmd "packadd nvim-treesitter"
 require('nvim-treesitter.configs').setup {
   ensure_installed = {},
 
   highlight = {
     enable = true,
+  },
+
+  textobjects = {
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        ["]f"] = "@function.outer"
+      },
+      goto_next_end = {
+        ["]F"] = "@function.outer"
+      },
+      goto_previous_start = {
+        ["[f"] = "@function.outer"
+      },
+      goto_previous_end = {
+        ["[F"] = "@function.outer"
+      }
+    }
   },
 
   incremental_selection = {
@@ -18,3 +36,14 @@ require('nvim-treesitter.configs').setup {
     }
   }
 }
+
+local mini_ai = require('mini.ai')
+mini_ai.setup {
+  custom_textobjects = {
+    F = mini_ai.gen_spec.treesitter({ 
+      a = '@function.outer', i = '@function.inner' 
+    })
+  }
+}
+
+require('mini.comment').setup()
