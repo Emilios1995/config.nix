@@ -1,4 +1,3 @@
-require('mini.surround').setup()
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = {},
@@ -46,4 +45,33 @@ mini_ai.setup {
   }
 }
 
+-- add, replace, remove surrounding pairs of chars
+require('mini.surround').setup()
+
 require('mini.comment').setup()
+
+-- `[` and `]` keymaps to jump to next/prev 
+-- buffer, file, quickfix item, etc.
+require('mini.bracketed').setup()
+
+-- extend `f` and `t` to work on multiple lines.
+-- (sometimes faster than searching for a pattern.)
+require('mini.jump').setup()
+
+-- auto pairing
+require('mini.pairs').setup()
+
+-- using this just for the scrolling animation,
+-- which makes <C-u> and <C-d> easier to follow
+require('mini.animate').setup {
+  scroll = {enable = true},
+  close = {enable = false},
+  cursor = {enable = false},
+  resize = {enable = false},
+  open = {enable = false},
+}
+
+-- use `gS` to toggle between arguments being on a single
+-- line or split into lines. arguments can be function args,
+-- object/record attrs, etc.
+require('mini.splitjoin').setup()
