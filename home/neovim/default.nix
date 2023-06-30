@@ -13,6 +13,13 @@ with lib;
       rose-pine
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects
+      nvim-lspconfig
+    ];
+
+    extraPackages = with pkgs; [
+      lua-language-server
+      nil #nix ls
+      nodePackages.typescript-language-server
     ];
 
   };
@@ -21,4 +28,5 @@ with lib;
     source = ./config;
     recursive = true;
   };
+
 }
