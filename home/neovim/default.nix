@@ -17,6 +17,9 @@ with lib;
       null-ls-nvim
       trouble-nvim
       oil-nvim
+      telescope-nvim
+      telescope-fzf-native-nvim
+      telescope-live-grep-args-nvim
     ];
 
     extraPackages = with pkgs; [
