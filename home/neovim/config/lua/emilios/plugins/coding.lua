@@ -55,7 +55,12 @@ require('mini.bracketed').setup()
 
 -- extend `f` and `t` to work on multiple lines.
 -- (sometimes faster than searching for a pattern.)
-require('mini.jump').setup()
+require('mini.jump').setup({
+  mappings = {
+    -- by default this is mapped to ; which i prefer mapping to :
+    repeat_jump = ""
+  }
+})
 
 -- auto pairing
 require('mini.pairs').setup()

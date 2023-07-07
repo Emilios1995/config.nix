@@ -46,3 +46,8 @@ signcolumn = 'yes'
 vim.cmd('colorscheme rose-pine')
 
 o.termguicolors = true
+
+-- General keymaps
+--
+
+keymap.set('n', ';', ':')
