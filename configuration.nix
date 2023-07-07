@@ -45,4 +45,6 @@
     description = "Emilio Srougo";
     home = "/Users/emilio";
   };
+
+  environment.etc."rescript-vscode".source = "${pkgs.vscode-extensions.chenglou92.rescript-vscode}";
 }

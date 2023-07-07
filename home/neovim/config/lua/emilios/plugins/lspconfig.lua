@@ -2,7 +2,6 @@ local nvim_lsp = require('lspconfig')
 local configs = require('lspconfig.configs')
 
 local default_on_attach = function(client, bufnr)
-
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -14,10 +13,8 @@ local default_on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
   vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-
 end
 
 local mk_server = function(config)
@@ -57,7 +54,6 @@ local servers = {
   pyright = mk_server(),
   ocamllsp = mk_server(),
   graphql = mk_server(),
-  eslint = mk_server(),
   hls = mk_server(),
   tsserver = mk_server {
     on_attach = function(client)
@@ -67,7 +63,7 @@ local servers = {
   rescriptls = mk_server {
     cmd = {
       'node',
-      '/Users/emilio/Library/pnpm/global/5/node_modules/rescript-vscode/server/out/server.js',
+      '/etc/rescript-vscode/share/vscode/extensions/chenglou92.rescript-vscode/server/out/server.js',
       '--stdio'
     },
   },
@@ -112,3 +108,13 @@ local servers = {
 for server, config in pairs(servers) do
   nvim_lsp[server].setup(config)
 end
+
+local null_ls = require 'null-ls'
+
+null_ls.setup({
+  on_attach = default_on_attach,
+  sources = {
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.diagnostics.eslint,
+  }
+})

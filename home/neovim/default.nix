@@ -14,6 +14,8 @@ with lib;
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects
       nvim-lspconfig
+      null-ls-nvim
+      trouble-nvim
     ];
 
     extraPackages = with pkgs; [
