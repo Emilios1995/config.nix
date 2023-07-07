@@ -16,12 +16,14 @@ with lib;
       nvim-lspconfig
       null-ls-nvim
       trouble-nvim
+      oil-nvim
     ];
 
     extraPackages = with pkgs; [
       lua-language-server
       nil #nix ls
       nodePackages.typescript-language-server
+      nodePackages."@tailwindcss/language-server"
     ];
 
   };
