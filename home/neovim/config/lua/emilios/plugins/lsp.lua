@@ -60,6 +60,7 @@ local servers = {
       client.resolved_capabilities.document_formatting = false
     end,
   },
+  nil_ls = mk_server(),
   rescriptls = mk_server {
     cmd = {
       'node',

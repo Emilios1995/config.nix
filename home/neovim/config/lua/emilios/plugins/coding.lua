@@ -32,6 +32,25 @@ require('nvim-treesitter.configs').setup {
       scope_incremental = false,
       node_decremental = "<bs>"
     }
+  },
+
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = 'o',
+      toggle_hl_groups = 'i',
+      toggle_injected_languages = 't',
+      toggle_anonymous_nodes = 'a',
+      toggle_language_display = 'I',
+      focus_language = 'f',
+      unfocus_language = 'F',
+      update = 'R',
+      goto_node = '<cr>',
+      show_help = '?',
+    },
   }
 }
 
@@ -79,3 +98,24 @@ require('mini.animate').setup {
 -- line or split into lines. arguments can be function args,
 -- object/record attrs, etc.
 require('mini.splitjoin').setup()
+
+require('mini.completion').setup()
+
+-- select and accept the first item with <C-y>
+vim.keymap.set('i', '<C-y>', function()
+  local complete_info = vim.fn.complete_info({ 'selected', 'items' })
+  local item_selected = complete_info['selected'] ~= -1
+  local has_items = #complete_info['items'] > 0
+  local popup_open = vim.fn.pumvisible() == 1
+  return (not item_selected) and popup_open and has_items and "<C-n><C-y>" or "<C-y>"
+end, { expr = true })
+
+
+
+-- navigation between vim panes and tmux
+require('Navigator').setup()
+
+vim.keymap.set({ 'n', 't' }, '<C-h>', '<CMD>NavigatorLeft<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-l>', '<CMD>NavigatorRight<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-k>', '<CMD>NavigatorUp<CR>')
+vim.keymap.set({ 'n', 't' }, '<C-j>', '<CMD>NavigatorDown<CR>')

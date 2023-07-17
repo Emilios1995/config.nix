@@ -17,6 +17,18 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    tree-sitter-rescript = {
+     url = "github:nkrkv/tree-sitter-rescript";
+     flake = false;
+    };
+
+    nvim-treesitter-rescript = {
+     url = "github:nkrkv/nvim-treesitter-rescript";
+     flake = false;
+    };
+
+    t-smart-tmux-session-manager = { url = "github:joshmedeski/t-smart-tmux-session-manager"; flake = false; };
+    rose-pine-tmux = { url = "github:mcanueste/rose-pine-tmux"; flake = false; };
   };
 
   outputs = { self, darwin, nixpkgs-stable, home-manager, ... }@inputs:
@@ -35,6 +47,22 @@
     darwinConfigurations = rec {
       v-mac = darwinSystem {
         system = "x86_64-darwin";
+        modules = [ 
+          # Main `nix-darwin` config
+          ./configuration.nix
+          # `home-manager` module
+          home-manager.darwinModules.home-manager
+          {
+            nixpkgs = nixpkgsConfig;
+            # `home-manager` config
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.emilio = { imports = [./home]; };
+          }
+        ];
+      };
+      mac-studio = darwinSystem {
+        system = "aarch64-darwin";
         modules = [ 
           # Main `nix-darwin` config
           ./configuration.nix
@@ -71,6 +99,42 @@
             inherit (nixpkgsConfig) config;
           };
         };
+
+        tree-sitter-rescript = final: prev: {
+          vimPlugins = prev.vimPlugins.extend (vfinal: vprev: {
+            "nvim-treesitter-rescript" = final.vimUtils.buildVimPluginFrom2Nix {
+              pname = "nvim-treesitter-rescript";
+              version = inputs.nvim-treesitter-rescript.lastModifiedDate;
+              src = inputs.nvim-treesitter-rescript;
+            };
+          });
+         tree-sitter-grammars = prev.tree-sitter-grammars  // {
+           tree-sitter-rescript = final.tree-sitter.buildGrammar {
+              version = inputs.nvim-treesitter-rescript.lastModifiedDate;
+              src = inputs.nvim-treesitter-rescript;
+              language = "rescript";
+              #generate = true;
+              location  = "tree-sitter-rescript";
+           };
+         };
+        };
+       tmux = final: prev: { 
+        tmuxPlugins = prev.tmuxPlugins // {
+          t-smart-tmux-session-manager = final.tmuxPlugins.mkTmuxPlugin {
+          pluginName = "t-smart-tmux-session-manager";
+          rtpFilePath = "t-smart-tmux-session-manager.tmux";
+          src = inputs.t-smart-tmux-session-manager;
+          version = inputs.t-smart-tmux-session-manager.shortRev;
+        };
+        rose-pine-tmux = final.tmuxPlugins.mkTmuxPlugin {
+          pluginName = "rose-pine-tmux";
+          rtpFilePath = "rose-pine-tmux.tmux";
+          src = inputs.rose-pine-tmux;
+          version = inputs.rose-pine-tmux.shortRev;
+        };
       };
+      };
+    };
+
  };
 }

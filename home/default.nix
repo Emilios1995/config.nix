@@ -4,6 +4,7 @@
   imports = [
     ./git.nix
     ./neovim
+    ./tmux.nix
   ];
 
   home.stateVersion = "23.11";
@@ -30,11 +31,31 @@
    };
   };
 
-  /*
   programs.wezterm = {
     enable = true;
+    enableZshIntegration = true;
+    extraConfig = ''
+     -- Pull in the wezterm API
+    local wezterm = require 'wezterm'
+
+    local config = {}
+    config = wezterm.config_builder()
+
+    config.color_scheme = 'rose-pine'
+
+    config.use_fancy_tab_bar = false
+    config.tab_bar_at_bottom = true
+    config.hide_tab_bar_if_only_one_tab = true
+
+    config.use_cap_height_to_scale_fallback_fonts = true;
+    config.font = wezterm.font "PragmataPro Mono Liga"
+    config.line_height = 1.5
+    config.allow_square_glyphs_to_overflow_width = "Never"
+    config.font_size = 14.5
+
+    return config
+    '';
   };
-  */
 
   programs.bat = {
     enable = true;
@@ -79,6 +100,7 @@
     postgresql_14
     (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin]))
     kubectl
+    cloud-sql-proxy
 
 
     nodePackages.typescript

@@ -5,7 +5,7 @@ vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" }
 
 -- Telescope
 local telescope = require 'telescope'
-telescope.setup{
+telescope.setup {
   defaults = {
     mappings = {
 

@@ -2,6 +2,9 @@
 {
   # Nix configuration ------------------------------------------------------------------------------
 
+  imports = [
+    ./homebrew.nix
+  ];
 
   nix.settings = {
     binary-caches = [
