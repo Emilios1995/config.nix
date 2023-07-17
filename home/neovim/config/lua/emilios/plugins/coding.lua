@@ -99,23 +99,3 @@ require('mini.animate').setup {
 -- object/record attrs, etc.
 require('mini.splitjoin').setup()
 
-require('mini.completion').setup()
-
--- select and accept the first item with <C-y>
-vim.keymap.set('i', '<C-y>', function()
-  local complete_info = vim.fn.complete_info({ 'selected', 'items' })
-  local item_selected = complete_info['selected'] ~= -1
-  local has_items = #complete_info['items'] > 0
-  local popup_open = vim.fn.pumvisible() == 1
-  return (not item_selected) and popup_open and has_items and "<C-n><C-y>" or "<C-y>"
-end, { expr = true })
-
-
-
--- navigation between vim panes and tmux
-require('Navigator').setup()
-
-vim.keymap.set({ 'n', 't' }, '<C-h>', '<CMD>NavigatorLeft<CR>')
-vim.keymap.set({ 'n', 't' }, '<C-l>', '<CMD>NavigatorRight<CR>')
-vim.keymap.set({ 'n', 't' }, '<C-k>', '<CMD>NavigatorUp<CR>')
-vim.keymap.set({ 'n', 't' }, '<C-j>', '<CMD>NavigatorDown<CR>')
