@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 {
   # Nix configuration ------------------------------------------------------------------------------
-
   imports = [
     ./homebrew.nix
   ];
@@ -52,5 +51,5 @@
     home = "/Users/emilio";
   };
 
-  environment.etc."rescript-vscode".source = "${pkgs.vscode-extensions.chenglou92.rescript-vscode}";
+  environment.etc."rescript-vscode".source = "${pkgs.vscode-marketplace.chenglou92.rescript-vscode}";
 }

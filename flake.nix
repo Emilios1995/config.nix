@@ -5,6 +5,7 @@
     # Package sets
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     # Environment/system management
     darwin.url = "github:lnl7/nix-darwin/master";
@@ -83,6 +84,8 @@
 
     overlays = {
       # Overlays to add various packages into package set
+
+      vscode-extensions = inputs.nix-vscode-extensions.overlays.default;
 
       # Overlay useful on Macs with Apple Silicon
         apple-silicon = final: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
