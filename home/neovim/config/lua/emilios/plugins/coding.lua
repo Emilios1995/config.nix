@@ -98,4 +98,3 @@ require('mini.animate').setup {
 -- line or split into lines. arguments can be function args,
 -- object/record attrs, etc.
 require('mini.splitjoin').setup()
-

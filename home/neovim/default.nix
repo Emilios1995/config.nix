@@ -27,6 +27,7 @@ with lib;
       telescope-live-grep-args-nvim
       nvim-treesitter-rescript
       Navigator-nvim
+      copilot-lua
     ];
 
     extraPackages = with pkgs; [
