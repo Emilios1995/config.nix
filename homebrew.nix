@@ -40,5 +40,7 @@ in
     "1password"
     "notion"
     "whatsapp"
+    "loom"
+    "tidal"
   ];
 }
