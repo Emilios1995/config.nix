@@ -5,10 +5,12 @@ vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" }
 
 -- Telescope
 local telescope = require 'telescope'
+local actions = require 'telescope.actions'
 telescope.setup {
   defaults = {
     mappings = {
 
+      i = { ["<c-f>"] = actions.to_fuzzy_refine },
     }
   },
   pickers = {
