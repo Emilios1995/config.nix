@@ -50,7 +50,9 @@ vim.keymap.set('n', '<leader>li', builtin.lsp_implementations, {})
 vim.keymap.set('n', '<leader>ld', builtin.lsp_definitions, {})
 vim.keymap.set('n', '<leader>lt', builtin.lsp_type_definitions, {})
 
-require('mini.completion').setup()
+require('mini.completion').setup({
+  lsp_completion = { source_func = 'omnifunc', auto_setup = false }
+})
 
 -- select and accept the first item with <C-y>
 vim.keymap.set('i', '<C-y>', function()
