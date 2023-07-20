@@ -86,7 +86,15 @@
   programs.gh.settings.git_protocol = "ssh";
 
 
-  programs.lazygit.enable = true;
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      git.paging = {
+        colorArg= "always";
+        pager = "delta --dark --paging=never";
+      };
+    };
+  };
 
   home.packages = with pkgs; [difftastic];
 
