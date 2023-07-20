@@ -6,11 +6,11 @@ local o = vim.o
 o.guicursor = "i:block"
 
 -- map space as leader key
-keymap.set('', '<Space>', '<Nop>', {noremap = true, silent = true})
+keymap.set('', '<Space>', '<Nop>', { noremap = true, silent = true })
 g.mapleader = ' '
 g.maplocalleader = ' '
 
-o.shiftwidth = 2 -- add 2 spaces at every indent level
+o.shiftwidth = 2   -- add 2 spaces at every indent level
 o.expandtab = true -- always convert tab to spaces
 
 o.relativenumber = true
@@ -21,15 +21,15 @@ o.number = true
 o.inccommand = 'nosplit'
 
 -- don't highlight search results
-o.hlsearch = false 
+o.hlsearch = false
 
 -- don't save when switching buffers
 o.hidden = true
 
- -- enable mouse mode
+-- enable mouse mode
 o.mouse = 'a'
 --
- -- keep indent level when wrapping a line
+-- keep indent level when wrapping a line
 o.breakindent = true
 
 -- save undo history
@@ -41,8 +41,9 @@ o.smartcase = true
 
 
 -- always show sign column (where numbers, folds, etc, are)
-signcolumn = 'yes'
+o.signcolumn = 'yes'
 
+-- theme
 vim.cmd('colorscheme rose-pine')
 
 o.termguicolors = true
