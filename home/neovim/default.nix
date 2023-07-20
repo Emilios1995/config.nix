@@ -28,6 +28,7 @@ with lib;
       nvim-treesitter-rescript
       Navigator-nvim
       copilot-lua
+      gitlinker-nvim
     ];
 
     extraPackages = with pkgs; [
