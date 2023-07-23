@@ -1,6 +1,8 @@
 local nvim_lsp = require('lspconfig')
 local configs = require('lspconfig.configs')
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 local default_on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.MiniCompletion.completefunc_lsp')
   local opts = { noremap = true, silent = true }
@@ -31,6 +33,7 @@ local mk_server = function(config)
     filetypes = config.filetypes,
     root_dir = config.root_dir,
     settings = config.settings,
+    capabilities = capabilities
   }
 end
 
