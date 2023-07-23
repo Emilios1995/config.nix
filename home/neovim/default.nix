@@ -8,27 +8,29 @@ with lib;
       :luafile ~/.config/nix/home/neovim/config/init.lua
     '';
 
-    plugins = with pkgs.vimPlugins; [
-      mini-nvim  
-      rose-pine
-      {
-        plugin = (nvim-treesitter.withPlugins (p: (
-          [ pkgs.tree-sitter-grammars.tree-sitter-rescript ]
-          ++ nvim-treesitter.allGrammars)
-          ));
-      }
-      nvim-treesitter-textobjects
-      nvim-lspconfig
-      null-ls-nvim
-      trouble-nvim
-      oil-nvim
-      telescope-nvim
-      telescope-fzf-native-nvim
-      telescope-live-grep-args-nvim
-      nvim-treesitter-rescript
-      Navigator-nvim
-      copilot-lua
-      gitlinker-nvim
+    plugins = 
+    let p = pkgs.vimPlugins; e = pkgs.vimExtraPlugins; in [
+       e.mini-nvim  
+       e.rose-pine
+       {
+         plugin = (p.nvim-treesitter.withPlugins (_: (
+           [ pkgs.tree-sitter-grammars.tree-sitter-rescript ]
+           ++ p.nvim-treesitter.allGrammars)
+           ));
+       }
+       e.nvim-treesitter-textobjects
+       e.nvim-lspconfig
+       e.null-ls-nvim
+       e.trouble-nvim
+       e.oil-nvim
+       e.telescope-nvim
+       p.telescope-fzf-native-nvim
+       p.telescope-live-grep-args-nvim
+       p.nvim-treesitter-rescript
+       p.Navigator-nvim # navigate between nvim and tmux
+       e.copilot-lua
+       p.gitlinker-nvim
+       e.fidget-nvim
     ];
 
     extraPackages = with pkgs; [

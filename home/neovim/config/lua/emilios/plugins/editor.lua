@@ -106,3 +106,7 @@ require('copilot').setup({
 })
 
 require "gitlinker".setup()
+
+require "fidget".setup {
+  window = { blend = 0 }
+}

@@ -30,6 +30,8 @@
 
     t-smart-tmux-session-manager = { url = "github:joshmedeski/t-smart-tmux-session-manager"; flake = false; };
     rose-pine-tmux = { url = "github:mcanueste/rose-pine-tmux"; flake = false; };
+
+    nixneovimplugins.url ="github:jooooscha/nixpkgs-vim-extra-plugins";
   };
 
   outputs = { self, darwin, nixpkgs-stable, home-manager, ... }@inputs:
@@ -85,7 +87,11 @@
     overlays = {
       # Overlays to add various packages into package set
 
+      # Using this to get the latest rescript lsp from the vscode extension
       vscode-extensions = inputs.nix-vscode-extensions.overlays.default;
+
+      # Regularly updated nvim plugins
+      neovim-nix = inputs.nixneovimplugins.overlays.default;
 
       # Overlay useful on Macs with Apple Silicon
         apple-silicon = final: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
