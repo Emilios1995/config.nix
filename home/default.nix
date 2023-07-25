@@ -10,7 +10,6 @@
   home.stateVersion = "23.11";
 
   programs.zsh.enable = true;
-  programs.zsh.enableSyntaxHighlighting = true;
   programs.zsh.enableAutosuggestions = true;
 
   programs.zsh.shellAliases = {
@@ -59,7 +58,7 @@
 
   programs.bat = {
     enable = true;
-    config.theme = "Solarized (dark)";
+    config.theme = "Solarized (Dark)";
   };
 
   programs.fzf = 
@@ -101,6 +100,7 @@
     (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin]))
     kubectl
     cloud-sql-proxy
+    graphite-cli
 
 
     nodePackages.typescript
