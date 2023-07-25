@@ -10,6 +10,7 @@
   home.stateVersion = "23.11";
 
   programs.zsh.enable = true;
+  programs.zsh.syntaxHighlighting.enable = true;
   programs.zsh.enableAutosuggestions = true;
 
   programs.zsh.shellAliases = {
