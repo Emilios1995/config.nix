@@ -48,6 +48,7 @@ vim.cmd('colorscheme rose-pine')
 
 o.termguicolors = true
 
+vim.cmd("set cmdheight=0")
 -- General keymaps
 --
 
