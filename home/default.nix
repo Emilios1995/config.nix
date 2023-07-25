@@ -50,8 +50,42 @@
     config.use_cap_height_to_scale_fallback_fonts = true;
     config.font = wezterm.font "PragmataPro Mono Liga"
     config.line_height = 1.5
-    -- config.allow_square_glyphs_to_overflow_width = "Never"
     config.font_size = 14.5
+
+    config.background = {
+      {
+        source = {
+          File = "Users/emilio/backgrounds/wondering.png",
+        },
+        width = '100%',
+      },
+      {
+        source = {
+          Color = "#191724",
+        },
+        width = '100%',
+        height = '100%',
+        opacity = 0.85
+      }
+    }
+
+    wezterm.on('toggle-background', function(window, pane)
+      local overrides = window:get_config_overrides() or {}
+      if not overrides.background then
+        overrides.background = {}
+      else
+        overrides.background = nil
+      end
+      window:set_config_overrides(overrides)
+    end)
+
+    config.keys = {
+      {
+        key = 'I',
+        mods = 'CTRL',
+        action = wezterm.action.EmitEvent 'toggle-background',
+      },
+    }
 
     return config
     '';
@@ -84,8 +118,6 @@
       enableZshIntegration = true;
     };
 
-
-
   home.packages = with pkgs; [
     # installs gnu version of packages like ls, rm, etc.
     coreutils
@@ -103,7 +135,6 @@
     cloud-sql-proxy
     graphite-cli
 
-
     nodePackages.typescript
     nodePackages.pnpm
     nodejs
@@ -118,11 +149,12 @@
     haskellPackages.cabal-plan
     haskellPackages.cabal-hoogle
 
-
     cargo
 
     comma
     manix
     nodePackages.node2nix
   ];
+
+  home.file.backgrounds.source = ../backgrounds;
 }
