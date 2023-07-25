@@ -30,15 +30,16 @@ with lib;
        p.Navigator-nvim # navigate between nvim and tmux
        e.copilot-lua
        p.gitlinker-nvim
-       e.fidget-nvim
+       p.fidget-legacy-nvim
     ];
 
-    extraPackages = with pkgs; [
-      lua-language-server
+    extraPackages = 
+    [pkgs.pkgs-stable.lua-language-server] ++
+    (with pkgs; [
       nil #nix ls
       nodePackages.typescript-language-server
       nodePackages."@tailwindcss/language-server"
-    ];
+    ]);
 
   };
 

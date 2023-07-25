@@ -28,6 +28,7 @@
      flake = false;
     };
 
+
     t-smart-tmux-session-manager = { url = "github:joshmedeski/t-smart-tmux-session-manager"; flake = false; };
     rose-pine-tmux = { url = "github:mcanueste/rose-pine-tmux"; flake = false; };
 
@@ -109,14 +110,25 @@
           };
         };
 
-        tree-sitter-rescript = final: prev: {
+        nvim = final: prev: {
           vimPlugins = prev.vimPlugins.extend (vfinal: vprev: {
             "nvim-treesitter-rescript" = final.vimUtils.buildVimPluginFrom2Nix {
               pname = "nvim-treesitter-rescript";
               version = inputs.nvim-treesitter-rescript.lastModifiedDate;
               src = inputs.nvim-treesitter-rescript;
             };
+            fidget-legacy-nvim = final.vimUtils.buildVimPluginFrom2Nix {
+              pname = "fidget-legacy-nvim";
+              src = prev.fetchFromGitHub {
+                owner = "j-hui";
+                repo = "fidget.nvim";
+                rev = "90c22e47be057562ee9566bad313ad42d622c1d3";
+                sha256 = "1ga6pxz89687km1mwisd4vfl1bpw6gg100v9xcfjks03zc1bywrp";
+              };
+              version = "legacy";
+            };
           });
+
          tree-sitter-grammars = prev.tree-sitter-grammars  // {
            tree-sitter-rescript = final.tree-sitter.buildGrammar {
               version = inputs.nvim-treesitter-rescript.lastModifiedDate;
