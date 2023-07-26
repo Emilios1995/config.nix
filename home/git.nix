@@ -67,6 +67,8 @@
         markUnblamableLines = true;
       };
 
+      http.postBuffer = 524288000;
+
     };
     ignores = [
       ".DS_STORE"
