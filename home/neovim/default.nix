@@ -31,6 +31,7 @@ with lib;
        e.copilot-lua
        p.gitlinker-nvim
        p.fidget-legacy-nvim
+       e.diffview-nvim
     ];
 
     extraPackages = 

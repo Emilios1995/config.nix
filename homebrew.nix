@@ -42,5 +42,6 @@ in
     "whatsapp"
     "loom"
     "tidal"
+    "google-chrome"
   ];
 }
