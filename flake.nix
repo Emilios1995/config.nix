@@ -65,11 +65,12 @@
           }
         ];
       };
-      mac-studio = darwinSystem {
+      emilios-mac-studio = darwinSystem {
         system = "aarch64-darwin";
         modules = [ 
           # Main `nix-darwin` config
           ./configuration.nix
+          { networking.hostName = "emilios-mac-studio"; }
           # `home-manager` module
           home-manager.darwinModules.home-manager
           {
