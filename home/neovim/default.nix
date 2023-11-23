@@ -40,7 +40,7 @@ with lib;
        e.cmp-cmdline
        e.LuaSnip
        e.gitsigns-nvim
-       e.neogit
+       p.neogit
        e.zen-mode-nvim
     ];
 
