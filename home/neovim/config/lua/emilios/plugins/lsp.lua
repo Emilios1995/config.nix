@@ -1,7 +1,7 @@
 local nvim_lsp = require('lspconfig')
 local configs = require('lspconfig.configs')
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local default_on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.MiniCompletion.completefunc_lsp')
@@ -15,8 +15,13 @@ local default_on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
   vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+  vim.keymap.set('n', '<leader>f', function()
+    vim.lsp.buf.format({
+      async = true,
+      filter = function(client_) return client_.name ~= "tsserver" end
+    })
+  end, opts)
 end
 
 local mk_server = function(config)
@@ -58,11 +63,7 @@ local servers = {
   ocamllsp = mk_server(),
   graphql = mk_server(),
   hls = mk_server(),
-  tsserver = mk_server {
-    on_attach = function(client)
-      client.resolved_capabilities.document_formatting = false
-    end,
-  },
+  tsserver = mk_server(),
   nil_ls = mk_server(),
   rescriptls = mk_server {
     cmd = {
@@ -118,7 +119,9 @@ local null_ls = require 'null-ls'
 null_ls.setup({
   on_attach = default_on_attach,
   sources = {
-    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.prettier.with({
+      cmd = 'pnpm prettier'
+    }),
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.completion.spell
   }

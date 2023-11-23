@@ -9,12 +9,16 @@
 
   home.stateVersion = "23.11";
 
-  programs.zsh.enable = true;
-  programs.zsh.syntaxHighlighting.enable = true;
-  programs.zsh.enableAutosuggestions = true;
-
-  programs.zsh.shellAliases = {
-    "atras" = "cd ..";
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    syntaxHighlighting = {
+      enable = true;
+    };
+    initExtra = ''
+      source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
+    '';
   };
 
   programs.direnv.enable = true;
@@ -47,7 +51,7 @@
     config.tab_bar_at_bottom = true
     config.hide_tab_bar_if_only_one_tab = true
 
-    config.use_cap_height_to_scale_fallback_fonts = true;
+    -- config.use_cap_height_to_scale_fallback_fonts = true;
     config.font = wezterm.font "PragmataPro Mono Liga"
     config.line_height = 1.5
     config.font_size = 14.5
@@ -65,7 +69,7 @@
         },
         width = '100%',
         height = '100%',
-        opacity = 0.85
+        opacity = 0.90
       }
     }
 
@@ -118,6 +122,8 @@
       enableZshIntegration = true;
     };
 
+  programs.java.enable = true;
+
   home.packages = with pkgs; [
     # installs gnu version of packages like ls, rm, etc.
     coreutils
@@ -127,10 +133,11 @@
     jq
     fd
     ranger
+    zsh-forgit
 
     just
     postgresql_14
-    (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin]))
+    (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin google-cloud-sdk.components.pubsub-emulator ]))
     kubectl
     cloud-sql-proxy
     graphite-cli
@@ -148,6 +155,10 @@
     haskellPackages.cabal-fmt
     haskellPackages.cabal-plan
     haskellPackages.cabal-hoogle
+
+    ocamlPackages.ocaml-lsp
+    ocamlPackages.ocamlformat_0_21_0
+
 
     cargo
 

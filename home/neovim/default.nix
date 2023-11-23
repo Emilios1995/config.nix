@@ -32,6 +32,16 @@ with lib;
        p.gitlinker-nvim
        p.fidget-legacy-nvim
        e.diffview-nvim
+       e.nvim-cmp
+       e.cmp-nvim-lsp
+       e.cmp-buffer
+       e.cmp-path
+       e.cmp-luasnip
+       e.cmp-cmdline
+       e.LuaSnip
+       e.gitsigns-nvim
+       e.neogit
+       e.zen-mode-nvim
     ];
 
     extraPackages = 
@@ -40,6 +50,7 @@ with lib;
       nil #nix ls
       nodePackages.typescript-language-server
       nodePackages."@tailwindcss/language-server"
+      nodePackages.graphql-language-service-cli
     ]);
 
   };
@@ -48,5 +59,4 @@ with lib;
     source = ./config;
     recursive = true;
   };
-
 }

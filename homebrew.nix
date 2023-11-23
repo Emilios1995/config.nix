@@ -17,6 +17,7 @@ in
   homebrew.brews = [
     "watchman"
     "kubefwd"
+    "opam"
   ];
 
   homebrew.taps = [
@@ -39,7 +40,7 @@ in
     "slack"
     "1password"
     "notion"
-    "whatsapp"
+    "whatsapp-beta"
     "loom"
     "tidal"
     "google-chrome"

@@ -38,6 +38,7 @@
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
+
   programs.zsh.enable = true;
 
   # https://github.com/nix-community/home-manager/issues/423

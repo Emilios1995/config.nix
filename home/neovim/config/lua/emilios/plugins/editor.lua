@@ -1,5 +1,22 @@
 -- File explorer
-require('oil').setup()
+require('oil').setup({
+  keymaps = {
+    ["g?"] = "actions.show_help",
+    ["<CR>"] = "actions.select",
+    ["<C-s>"] = "actions.select_vsplit",
+    ["<C-p>"] = "actions.preview",
+    ["<C-c>"] = "actions.close",
+    ["<C-r>"] = "actions.refresh",
+    ["-"] = "actions.parent",
+    ["gs"] = "actions.change_sort",
+    ["gx"] = "actions.open_external",
+    ["g."] = "actions.toggle_hidden",
+  },
+  use_default_keymaps = false,
+  view_options = {
+    show_hidden = true,
+  }
+})
 
 vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
 
@@ -50,20 +67,6 @@ vim.keymap.set('n', '<leader>li', builtin.lsp_implementations, {})
 vim.keymap.set('n', '<leader>ld', builtin.lsp_definitions, {})
 vim.keymap.set('n', '<leader>lt', builtin.lsp_type_definitions, {})
 
-require('mini.completion').setup({
-  lsp_completion = { source_func = 'omnifunc', auto_setup = false }
-})
-
--- select and accept the first item with <C-y>
-vim.keymap.set('i', '<C-y>', function()
-  local complete_info = vim.fn.complete_info({ 'selected', 'items' })
-  local item_selected = complete_info['selected'] ~= -1
-  local has_items = #complete_info['items'] > 0
-  local popup_open = vim.fn.pumvisible() == 1
-  return (not item_selected) and popup_open and has_items and "<C-n><C-y>" or "<C-y>"
-end, { expr = true })
-
-
 
 -- navigation between vim panes and tmux
 require('Navigator').setup()
@@ -105,8 +108,14 @@ require('copilot').setup({
   server_opts_overrides = {},
 })
 
+-- copy GitHub URLs to clipboard
 require "gitlinker".setup()
 
+-- LSP progress indicator
 require "fidget".setup {
   window = { blend = 0 }
 }
+
+require('gitsigns').setup()
+
+require('neogit').setup()
