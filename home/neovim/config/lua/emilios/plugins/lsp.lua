@@ -60,7 +60,7 @@ end
 if not configs.rescriptls then
   configs.rescriptls = {
     default_config = {
-      cmd = { "npx", "rescript-language-server", "--stdio" },
+      cmd = { "npx", "@rescript/language-server", "--stdio" },
       filetypes = {
         "rescript",
       },
