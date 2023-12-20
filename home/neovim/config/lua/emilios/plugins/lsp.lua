@@ -56,6 +56,20 @@ if not configs.rescript_relay_lsp then
   }
 end
 
+
+if not configs.rescriptls then
+  configs.rescriptls = {
+    default_config = {
+      cmd = { "npx", "rescript-language-server", "--stdio" },
+      filetypes = {
+        "rescript",
+      },
+      root_dir = nvim_lsp.util.root_pattern 'relay.config.js',
+    },
+    settings = {},
+  }
+end
+
 local servers = {
   clangd = mk_server(),
   rust_analyzer = mk_server(),
@@ -65,13 +79,7 @@ local servers = {
   hls = mk_server(),
   tsserver = mk_server(),
   nil_ls = mk_server(),
-  rescriptls = mk_server {
-    cmd = {
-      'node',
-      '/etc/rescript-vscode/share/vscode/extensions/chenglou92.rescript-vscode/server/out/server.js',
-      '--stdio'
-    },
-  },
+  rescriptls = mk_server(),
   tailwindcss = mk_server {
     settings = {
       tailwindCSS = {

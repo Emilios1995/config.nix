@@ -59,7 +59,7 @@
     config.background = {
       {
         source = {
-          File = "Users/emilio/backgrounds/wondering.png",
+          File = "Users/emilio/backgrounds/gravity.jpeg",
         },
         width = '100%',
       },
