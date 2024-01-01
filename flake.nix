@@ -28,6 +28,8 @@
      flake = false;
     };
 
+    sg-nvim.url = "github:sourcegraph/sg.nvim";
+
 
     t-smart-tmux-session-manager = { url = "github:joshmedeski/t-smart-tmux-session-manager"; flake = false; };
     rose-pine-tmux = { url = "github:mcanueste/rose-pine-tmux"; flake = false; };
@@ -128,7 +130,8 @@
               };
               version = "legacy";
             };
-          });
+            sg-nvim = inputs.sg-nvim.packages.${prev.system}.sg-nvim;  
+        });
 
          tree-sitter-grammars = prev.tree-sitter-grammars  // {
            tree-sitter-rescript = final.tree-sitter.buildGrammar {
@@ -140,6 +143,11 @@
            };
          };
         };
+
+       sg-nvim = final: prev: {
+          sg-nvim = inputs.sg-nvim.packages.${prev.system}.default;
+        };
+
        tmux = final: prev: { 
         tmuxPlugins = prev.tmuxPlugins // {
           t-smart-tmux-session-manager = final.tmuxPlugins.mkTmuxPlugin {

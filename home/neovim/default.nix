@@ -1,4 +1,4 @@
-{ pkgs, lib, ...}:
+{ pkgs, lib, inputs', ...}:
 with lib;
 {
   programs.neovim = {
@@ -42,6 +42,7 @@ with lib;
        e.gitsigns-nvim
        p.neogit
        e.zen-mode-nvim
+       p.sg-nvim
     ];
 
     extraPackages = 
@@ -51,6 +52,7 @@ with lib;
       nodePackages.typescript-language-server
       nodePackages."@tailwindcss/language-server"
       nodePackages.graphql-language-service-cli
+      sg-nvim
     ]);
 
   };

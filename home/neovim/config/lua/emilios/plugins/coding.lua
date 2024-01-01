@@ -118,6 +118,13 @@ cmp.setup(
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ["<C-s>"] = cmp.mapping.complete {
+        config = {
+          sources = {
+            { name = "cody" },
+          },
+        },
+      },
     }),
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
