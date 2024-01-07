@@ -21,9 +21,7 @@ in
   ];
 
   homebrew.taps = [
-    "homebrew/cask"
     "homebrew/cask-versions"
-    "homebrew/core"
     "homebrew/services"
     "txn2/tap"
   ];
