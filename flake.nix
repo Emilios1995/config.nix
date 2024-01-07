@@ -84,6 +84,23 @@
           }
         ];
       };
+      emilios-macbook-pro = darwinSystem {
+        system = "x86_64-darwin";
+        modules = [ 
+          # Main `nix-darwin` config
+          ./configuration.nix
+          { networking.hostName = "emilios-macbook-pro"; }
+          # `home-manager` module
+          home-manager.darwinModules.home-manager
+          {
+            nixpkgs = nixpkgsConfig;
+            # `home-manager` config
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.emilio = { imports = [./home]; };
+          }
+        ];
+      };
     };
 
     # Overlays --------------------------------------------------------------- {{{

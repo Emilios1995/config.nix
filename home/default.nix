@@ -36,6 +36,7 @@
   };
 
   programs.wezterm = {
+    package = if pkgs.stdenv.hostPlatform.isAarch64 then pkgs.wezterm else pkgs.pkgs-stable.wezterm;
     enable = true;
     enableZshIntegration = true;
     extraConfig = ''
