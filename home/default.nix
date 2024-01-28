@@ -166,6 +166,8 @@
     comma
     manix
     nodePackages.node2nix
+
+    nix-output-monitor
   ];
 
   home.file.backgrounds.source = ../backgrounds;

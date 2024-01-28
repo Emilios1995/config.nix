@@ -16,6 +16,10 @@ build *args='':
     @echo -e "{{ GREEN }}Starting...{{ CLEAR }}"
     nix --experimental-features 'nix-command flakes' build .#{{ SYSTEM }} --impure $@
 
+build-nom *args='':
+    @echo -e "{{ GREEN }}Starting...{{ CLEAR }}"
+    nom build .#{{ SYSTEM }} --impure $@
+
 # Switch to a new generation
 rebuild-switch *args='': (build args)
     @echo -e "{{ GREEN }}Switching to new generation...{{ CLEAR }}"
