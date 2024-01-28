@@ -42,5 +42,7 @@ in
     "loom"
     "tidal"
     "google-chrome"
+    "google-chrome-canary"
+    "firefox"
   ];
 }
