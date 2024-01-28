@@ -43,6 +43,7 @@ with lib;
        p.neogit
        e.zen-mode-nvim
        p.sg-nvim
+       e.no-neck-pain-nvim
     ];
 
     extraPackages = 

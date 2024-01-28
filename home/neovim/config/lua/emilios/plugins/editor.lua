@@ -119,3 +119,7 @@ require "fidget".setup {
 require('gitsigns').setup()
 
 require('neogit').setup()
+
+-- NoNeckPain
+
+vim.keymap.set('n', '<leader>n', "<CMD>NoNeckPain<CR>", { desc = "Toggle NoNeckPain" })
