@@ -45,6 +45,7 @@ with lib;
        p.sg-nvim
        e.no-neck-pain-nvim
        e.grapple-nvim
+       p.bufjump-nvim
     ];
 
     extraPackages = 

@@ -125,7 +125,7 @@ require('neogit').setup()
 vim.keymap.set('n', '<leader>n', "<CMD>NoNeckPain<CR>", { desc = "Toggle NoNeckPain" })
 
 
--- Grapple
+-- Grapple (file tagging, similar to harpoon)
 
 require("grapple").setup({
   scope = "git_branch",
@@ -176,3 +176,10 @@ end)
 
 vim.keymap.set("n", "<leader>mq", require("grapple").cycle_backward)
 vim.keymap.set("n", "<leader>mp", require("grapple").cycle_forward)
+
+-- Buffjump (jump to next/previously visited buffer)
+require("bufjump").setup({
+  forward = "<C-n>",
+  backward = "<C-p>",
+  on_success = nil
+})
