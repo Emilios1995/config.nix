@@ -123,3 +123,56 @@ require('neogit').setup()
 -- NoNeckPain
 
 vim.keymap.set('n', '<leader>n', "<CMD>NoNeckPain<CR>", { desc = "Toggle NoNeckPain" })
+
+
+-- Grapple
+
+require("grapple").setup({
+  scope = "git_branch",
+
+  ---Window options used for the popup menu
+  popup_options = {
+    relative = "editor",
+    width = 60,
+    height = 12,
+    style = "minimal",
+    focusable = false,
+    border = "single",
+  },
+})
+
+
+vim.keymap.set("n", "<leader>mt", require("grapple").toggle)
+vim.keymap.set("n", "<leader>mm", require("grapple").popup_tags)
+
+vim.keymap.set("n", "<leader>mn", function()
+  require("grapple").select({ key = "{name}" })
+end)
+
+vim.keymap.set("n", "<leader>mN", function()
+  require("grapple").toggle({ key = "{name}" })
+end)
+
+vim.keymap.set("n", "<leader>m1", function()
+  require("grapple").select({ key = 1 })
+end)
+
+vim.keymap.set("n", "<leader>m2", function()
+  require("grapple").select({ key = 2 })
+end)
+
+vim.keymap.set("n", "<leader>m3", function()
+  require("grapple").select({ key = 3 })
+end)
+
+vim.keymap.set("n", "<leader>m4", function()
+  require("grapple").select({ key = 4 })
+end)
+
+vim.keymap.set("n", "<leader>m5", function()
+  require("grapple").select({ key = 5 })
+end)
+
+
+vim.keymap.set("n", "<leader>mq", require("grapple").cycle_backward)
+vim.keymap.set("n", "<leader>mp", require("grapple").cycle_forward)

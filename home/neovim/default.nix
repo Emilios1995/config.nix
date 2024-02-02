@@ -44,6 +44,7 @@ with lib;
        e.zen-mode-nvim
        p.sg-nvim
        e.no-neck-pain-nvim
+       e.grapple-nvim
     ];
 
     extraPackages = 
