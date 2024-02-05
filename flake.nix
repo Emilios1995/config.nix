@@ -3,7 +3,8 @@
 
   inputs = {
     # Package sets
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
+    nixpkgs-23-11.url = "github:nixos/nixpkgs/nixpkgs-23.11-darwin";
+    nixpkgs-23-05.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
@@ -24,7 +25,7 @@
     };
 
     nvim-treesitter-rescript = {
-     url = "github:nkrkv/nvim-treesitter-rescript";
+     url = "github:Emilios1995/nvim-treesitter-rescript?ref=9f504103e5776824672c05c5d2d485de674732ad";
      flake = false;
     };
 
@@ -37,7 +38,7 @@
     nixneovimplugins.url ="github:jooooscha/nixpkgs-vim-extra-plugins";
   };
 
-  outputs = { self, darwin, nixpkgs-stable, home-manager, ... }@inputs:
+  outputs = { self, darwin, nixpkgs-23-05, nixpkgs-23-11, home-manager, ... }@inputs:
   let 
 
     inherit (darwin.lib) darwinSystem;
@@ -123,8 +124,15 @@
           };
         }; 
 
-        pkgs-stable = _: prev: {
-          pkgs-stable = import inputs.nixpkgs-stable {
+        pkgs-23-11 = _: prev: {
+          pkgs-23-11 = import inputs.nixpkgs-23-11 {
+            inherit (prev.stdenv) system;
+            inherit (nixpkgsConfig) config;
+          };
+        };
+
+        pkgs-23-05 = _: prev: {
+          pkgs-23-05 = import inputs.nixpkgs-23-05 {
             inherit (prev.stdenv) system;
             inherit (nixpkgsConfig) config;
           };

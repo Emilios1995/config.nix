@@ -36,7 +36,7 @@
   };
 
   programs.wezterm = {
-    package = if pkgs.stdenv.hostPlatform.isAarch64 then pkgs.wezterm else pkgs.pkgs-stable.wezterm;
+    package = if pkgs.stdenv.hostPlatform.isAarch64 then pkgs.wezterm else pkgs.pkgs-23-05.wezterm;
     enable = true;
     enableZshIntegration = true;
     extraConfig = ''
@@ -140,7 +140,7 @@
     postgresql_14
     (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin google-cloud-sdk.components.pubsub-emulator ]))
     kubectl
-    cloud-sql-proxy
+    google-cloud-sql-proxy
     graphite-cli
 
     nodePackages.typescript
@@ -154,11 +154,11 @@
     haskellPackages.hoogle
     haskellPackages.implicit-hie
     haskellPackages.cabal-fmt
-    haskellPackages.cabal-plan
-    haskellPackages.cabal-hoogle
+    #pkgs-23-05.haskellPackages.cabal-plan
+    #pkgs-23-05.haskellPackages.cabal-hoogle
 
     ocamlPackages.ocaml-lsp
-    ocamlPackages.ocamlformat_0_21_0
+    ocamlPackages.ocamlformat_0_23_0
 
 
     cargo

@@ -49,7 +49,7 @@ with lib;
     ];
 
     extraPackages = 
-    [pkgs.pkgs-stable.lua-language-server] ++
+    [pkgs.pkgs-23-11.lua-language-server] ++
     (with pkgs; [
       nil #nix ls
       nodePackages.typescript-language-server
