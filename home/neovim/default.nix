@@ -48,6 +48,7 @@ with lib;
        e.noice-nvim
        #e.nvim-notify
        e.nui-nvim
+       p.typescript-tools-nvim
     ];
 
     extraPackages = 
