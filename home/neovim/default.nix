@@ -30,7 +30,6 @@ with lib;
        p.Navigator-nvim # navigate between nvim and tmux
        e.copilot-lua
        p.gitlinker-nvim
-       p.fidget-legacy-nvim
        e.diffview-nvim
        e.nvim-cmp
        e.cmp-nvim-lsp
@@ -46,6 +45,9 @@ with lib;
        e.no-neck-pain-nvim
        e.grapple-nvim
        p.bufjump-nvim
+       e.noice-nvim
+       #e.nvim-notify
+       e.nui-nvim
     ];
 
     extraPackages = 

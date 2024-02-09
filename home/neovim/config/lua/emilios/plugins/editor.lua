@@ -111,11 +111,6 @@ require('copilot').setup({
 -- copy GitHub URLs to clipboard
 require "gitlinker".setup()
 
--- LSP progress indicator
-require "fidget".setup {
-  window = { blend = 0 }
-}
-
 require('gitsigns').setup()
 
 require('neogit').setup()
@@ -182,4 +177,79 @@ require("bufjump").setup({
   forward = "<C-n>",
   backward = "<C-p>",
   on_success = nil
+})
+
+
+-- Noice
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+    messages = {
+      -- Messages shown by lsp servers
+      enabled = true,
+      view = "mini",
+      opts = {},
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true,         -- use a classic bottom cmdline for search
+    command_palette = true,       -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false,       -- add a border to hover docs and signature help
+  },
+  messages = {
+    -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+    -- This is a current Neovim limitation.
+    enabled = true,              -- enables the Noice messages UI
+    view = "mini",               -- default view for messages
+    view_error = "mini",         -- view for errors
+    view_warn = "mini",          -- view for warnings
+    view_history = "messages",   -- view for :messages
+    view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+  },
+  message = {
+    -- Messages shown by lsp servers
+    enabled = true,
+    view = "mini",
+    opts = {},
+  },
+  views = {
+    cmdline_popup = {
+      position = {
+        row = 20,
+        col = "50%",
+      },
+      size = {
+        min_width = 60,
+        width = "auto",
+        height = "auto",
+      },
+    },
+    cmdline_popupmenu = {
+      relative = "editor",
+      position = {
+        row = 23,
+        col = "50%",
+      },
+      size = {
+        width = 60,
+        height = "auto",
+        max_height = 15,
+      },
+      border = {
+        style = "rounded",
+        padding = { 0, 1 },
+      },
+      win_options = {
+        winhighlight = { Normal = "Normal", FloatBorder = "NoiceCmdlinePopupBorder" },
+      },
+    },
+  }
 })

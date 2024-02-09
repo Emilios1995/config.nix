@@ -145,16 +145,6 @@
               version = inputs.nvim-treesitter-rescript.lastModifiedDate;
               src = inputs.nvim-treesitter-rescript;
             };
-            fidget-legacy-nvim = final.vimUtils.buildVimPluginFrom2Nix {
-              pname = "fidget-legacy-nvim";
-              src = prev.fetchFromGitHub {
-                owner = "j-hui";
-                repo = "fidget.nvim";
-                rev = "90c22e47be057562ee9566bad313ad42d622c1d3";
-                sha256 = "1ga6pxz89687km1mwisd4vfl1bpw6gg100v9xcfjks03zc1bywrp";
-              };
-              version = "legacy";
-            };
             sg-nvim = inputs.sg-nvim.packages.${prev.system}.sg-nvim;  
         });
 
