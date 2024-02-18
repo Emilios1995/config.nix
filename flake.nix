@@ -84,6 +84,7 @@
             home-manager.users.emilio = { imports = [./home]; };
           }
         ];
+
       };
       emilios-macbook-pro = darwinSystem {
         system = "x86_64-darwin";
