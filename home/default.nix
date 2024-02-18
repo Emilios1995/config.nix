@@ -168,6 +168,9 @@
     nodePackages.node2nix
 
     nix-output-monitor
+
+   # ollama: commented since the available version is out of date
+    bun
   ];
 
   home.file.backgrounds.source = ../backgrounds;
