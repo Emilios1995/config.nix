@@ -60,6 +60,7 @@ with lib;
       nodePackages.typescript-language-server
       nodePackages."@tailwindcss/language-server"
       nodePackages.graphql-language-service-cli
+      nodePackages.pyright
       sg-nvim
     ]);
 
