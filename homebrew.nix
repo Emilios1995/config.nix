@@ -44,5 +44,6 @@ in
     "google-chrome"
     "google-chrome-canary"
     "firefox"
+    "calibre"
   ];
 }
