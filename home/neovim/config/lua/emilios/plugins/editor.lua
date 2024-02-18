@@ -76,37 +76,37 @@ vim.keymap.set({ 'n', 't' }, '<C-l>', '<CMD>NavigatorRight<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-k>', '<CMD>NavigatorUp<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-j>', '<CMD>NavigatorDown<CR>')
 
-require('copilot').setup({
-  panel = {
-    enabled = false,
-  },
-  suggestion = {
-    enabled = true,
-    auto_trigger = true,
-    debounce = 75,
-    keymap = {
-      accept = "<tab>",
-      accept_word = false,
-      accept_line = false,
-      next = "<M-]>",
-      prev = "<M-[>",
-      dismiss = "<C-]>",
-    },
-  },
-  filetypes = {
-    yaml = false,
-    markdown = false,
-    help = false,
-    gitcommit = false,
-    gitrebase = false,
-    hgcommit = false,
-    svn = false,
-    cvs = false,
-    ["."] = false,
-  },
-  copilot_node_command = 'node', -- Node.js version must be > 16.x
-  server_opts_overrides = {},
-})
+-- require('copilot').setup({
+--   panel = {
+--     enabled = false,
+--   },
+--   suggestion = {
+--     enabled = true,
+--     auto_trigger = true,
+--     debounce = 75,
+--     keymap = {
+--       accept = "<tab>",
+--       accept_word = false,
+--       accept_line = false,
+--       next = "<M-]>",
+--       prev = "<M-[>",
+--       dismiss = "<C-]>",
+--     },
+--   },
+--   filetypes = {
+--     yaml = false,
+--     markdown = false,
+--     help = false,
+--     gitcommit = false,
+--     gitrebase = false,
+--     hgcommit = false,
+--     svn = false,
+--     cvs = false,
+--     ["."] = false,
+--   },
+--   copilot_node_command = 'node', -- Node.js version must be > 16.x
+--   server_opts_overrides = {},
+-- })
 
 -- copy GitHub URLs to clipboard
 require "gitlinker".setup()
@@ -252,4 +252,21 @@ require("noice").setup({
       },
     },
   }
+})
+
+require('gen').setup({
+  model = "mixtral:instruct",            -- The default model to use.
+  display_mode = "float",       -- The display mode. Can be "float" or "split".
+  show_prompt = false,          -- Shows the Prompt submitted to Ollama.
+  show_model = false,           -- Displays which model you are using at the beginning of your chat session.
+  no_auto_close = false,        -- Never closes the window automatically.
+  --init = function(options) pcall(io.popen, "ollama serve > /dev/null 2>&1 &") end,
+  -- Function to initialize Ollama
+  --command = "curl --silent --no-buffer -X POST http://localhost:11434/api/generate -d $body",
+  -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
+  -- This can also be a lua function returning a command string, with options as the input parameter.
+  -- The executed command must return a JSON object with { response, context }
+  -- (context property is optional).
+
+  debug = false                                 -- Prints errors and the command which is run.
 })
