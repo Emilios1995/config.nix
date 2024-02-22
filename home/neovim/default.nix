@@ -51,6 +51,7 @@ with lib;
        e.nui-nvim
        p.typescript-tools-nvim
        e.gen-nvim
+       p.telescope-ui-select-nvim
     ];
 
     extraPackages = 
@@ -70,4 +71,5 @@ with lib;
     source = ./config;
     recursive = true;
   };
+
 }

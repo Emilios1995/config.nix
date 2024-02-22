@@ -171,7 +171,27 @@
 
    # ollama: commented since the available version is out of date
     bun
+
+    luajitPackages.luarocks
+
+    cmake
+    lua
+
+    hurl
+
+
   ];
 
   home.file.backgrounds.source = ../backgrounds;
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-marketplace; [
+       gabrielnordeborn.vscode-rescript-relay
+       chenglou92.rescript-vscode
+       github.copilot
+       github.copilot-chat
+    ];
+  };
+
 }

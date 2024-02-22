@@ -113,7 +113,8 @@ local servers = {
       },
     },
   },
-  rescript_relay_lsp = mk_server()
+  rescript_relay_lsp = mk_server(),
+  purescriptls = mk_server(),
 }
 
 

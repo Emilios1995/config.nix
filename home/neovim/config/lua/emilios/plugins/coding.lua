@@ -92,10 +92,21 @@ require('mini.splitjoin').setup()
 
 -- completion
 
+local ls = require("luasnip")
+
+ls.setup({
+  history = true,
+  update_events = { "TextChanged", "TextChangedI" },
+  region_check_events = "InsertEnter",
+  delete_check_events = "InsertLeave",
+})
+
+require("luasnip.loaders.from_lua").load({ paths = { "$XDG_CONFIG_HOME/nvim/lua/emilios/snippets" } })
 
 local cmp = require("cmp")
-local defaults = require("cmp.config.default")()
+
 cmp.setup(
+---@diagnostic disable: redundant-parameter
   {
     completion = {
       completeopt = "menu,menuone,noinsert",
@@ -107,17 +118,31 @@ cmp.setup(
       end,
     },
     mapping = cmp.mapping.preset.insert({
-      ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-      ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+      ["<C-n>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+        elseif ls.expand_or_locally_jumpable() then
+          ls.expand_or_jump()
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
+      ["<C-p>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+        elseif ls.jumpable(-1) then
+          ls.jump(-1)
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.abort(),
-      ["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-      ["<C-Y>"] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
+      ["<C-y>"] = cmp.mapping.confirm({
         select = true,
-      }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      }),
       ["<C-s>"] = cmp.mapping.complete {
         config = {
           sources = {
@@ -162,3 +187,19 @@ cmp.setup(
     },
   }
 )
+
+---@diagnostic enable: redundant-parameter
+
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nix/home/neovim/config/snippets" })
+
+vim.keymap.set({ "i" }, "<C-k>", function() ls.expand() end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<C-l>", function()
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<C-u>", function()
+  require('luasnip.extras.select_choice')()
+end, { silent = true })
