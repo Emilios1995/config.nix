@@ -127,7 +127,7 @@ end
 
 
 return {
-  s(
+  snippet = s(
     { trig = "frag" },
     fmta([[
        module <module_name>Fragment = %relay(`
@@ -138,7 +138,7 @@ return {
 
        @react.component
        let make = (~<prop_name>) =>> {
-         let <prop_name_rep> = <module_name_rep>.use(<prop_name_rep>) 
+         let <prop_name_rep> = <module_name_rep>.use(<prop_name_rep>)
 
          <component_body>
        }
@@ -158,4 +158,3 @@ return {
     })
   )
 }
-
