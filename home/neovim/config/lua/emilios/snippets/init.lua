@@ -1,6 +1,8 @@
 local ls = require("luasnip")
-local rescript_relay_fragment = require('emilios.snippets.rescript.relay_fragment').snippet
+local rescript = require('emilios.snippets.rescript')
 
-ls.add_snippets('rescript', {
-  rescript_relay_fragment
-}, { key = 'rescript' })
+local setup = function()
+  rescript.setup()
+end
+
+setup()

@@ -6,7 +6,7 @@ with lib;
     vimAlias = true;
     extraConfig = ''
       set runtimepath+=~/.config/nix/home/neovim/config
-      lua require 'init'
+      lua require 'emilios.init'
     '';
 
     plugins = 

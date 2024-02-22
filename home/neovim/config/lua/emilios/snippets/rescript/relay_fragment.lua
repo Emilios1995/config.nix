@@ -10,6 +10,7 @@ local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local lspconfig = require('lspconfig')
 
+local M = {}
 
 local function buf_root(bufnr)
   local parser = vim.treesitter.get_parser(bufnr, 'graphql')
@@ -126,10 +127,9 @@ local function make_fragment_name(ancestor_modules, type)
 end
 
 
-return {
-  snippet = s(
-    { trig = "frag" },
-    fmta([[
+M.snippet = s(
+  { trig = "frag" },
+  fmta([[
        module <module_name>Fragment = %relay(`
          fragment <fragment_name> on <fragment_type> {
            <selections>
@@ -138,23 +138,26 @@ return {
 
        @react.component
        let make = (~<prop_name>) =>> {
-         let <prop_name_rep> = <module_name_rep>.use(<prop_name_rep>)
+         let <prop_name_rep> = <module_name_rep>Fragment.use(<prop_name_rep>)
 
          <component_body>
        }
     ]], {
-      module_name = i(1),
-      fragment_name = f(function(args)
-        local ancestors = get_current_node_ancestor_modules()
-        local type = args[1][1]
-        return make_fragment_name(ancestors, type)
-      end, { 2 }, nil),
-      fragment_type = d(2, make_type_choice_snippet(), {}),
-      prop_name = i(3),
-      prop_name_rep = rep(3),
-      module_name_rep = rep(1),
-      selections = i(4),
-      component_body = i(0, "React.null")
-    })
-  )
-}
+    module_name = i(1),
+    fragment_name = f(function(args)
+      local ancestors = get_current_node_ancestor_modules()
+      local type = args[1][1]
+      return make_fragment_name(ancestors, type)
+    end, { 2 }, nil),
+    fragment_type = d(2, make_type_choice_snippet(), {}),
+    prop_name = i(3),
+    prop_name_rep = rep(3),
+    module_name_rep = rep(1),
+    selections = i(4),
+    component_body = i(0, "React.null")
+  })
+)
+
+
+return M
+
