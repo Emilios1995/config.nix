@@ -5,7 +5,8 @@ with lib;
     enable = true;
     vimAlias = true;
     extraConfig = ''
-      :luafile ~/.config/nix/home/neovim/config/init.lua
+      set runtimepath+=~/.config/nix/home/neovim/config
+      lua require 'init'
     '';
 
     plugins = 
@@ -51,6 +52,7 @@ with lib;
        e.nui-nvim
        p.typescript-tools-nvim
        e.gen-nvim
+       p.telescope-ui-select-nvim
     ];
 
     extraPackages = 
@@ -66,8 +68,4 @@ with lib;
 
   };
 
-  xdg.configFile.nvim = {
-    source = ./config;
-    recursive = true;
-  };
 }

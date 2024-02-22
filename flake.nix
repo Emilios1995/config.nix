@@ -5,7 +5,7 @@
     # Package sets
     nixpkgs-23-11.url = "github:nixos/nixpkgs/nixpkgs-23.11-darwin";
     nixpkgs-23-05.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
-    nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     # Environment/system management
@@ -36,6 +36,9 @@
     rose-pine-tmux = { url = "github:mcanueste/rose-pine-tmux"; flake = false; };
 
     nixneovimplugins.url ="github:jooooscha/nixpkgs-vim-extra-plugins";
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
   };
 
   outputs = { self, darwin, nixpkgs-23-05, nixpkgs-23-11, home-manager, ... }@inputs:
@@ -180,6 +183,8 @@
         };
       };
       };
+
+      nvim-nightly = inputs.neovim-nightly-overlay.overlay;
     };
 
  };
