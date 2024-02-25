@@ -93,12 +93,21 @@ require('mini.splitjoin').setup()
 -- completion
 
 local ls = require("luasnip")
+local types = require "luasnip.util.types"
 
 ls.setup({
   history = true,
+  enable_autosnippets = false,
   update_events = { "TextChanged", "TextChangedI" },
   region_check_events = "InsertEnter",
   delete_check_events = "InsertLeave",
+  ext_opts = {
+    [types.choiceNode] = {
+      active = {
+        virt_text = { { " <-- Current selection", "Comment" } },
+      },
+    },
+  },
 })
 
 require("luasnip.loaders.from_lua").load({ paths = { "$XDG_CONFIG_HOME/nvim/lua/emilios/snippets" } })
