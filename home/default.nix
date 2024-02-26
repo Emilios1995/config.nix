@@ -5,6 +5,7 @@
     ./git.nix
     ./neovim
     ./tmux.nix
+    ./starship
   ];
 
   home.stateVersion = "23.11";
@@ -26,14 +27,6 @@
 
   programs.htop.enable = true;
   programs.htop.settings.show_program_path = true;
-
-  programs.starship = {
-   enable =  true;
-   enableZshIntegration = true;
-   settings = {
-    command_timeout = 1000;
-   };
-  };
 
   programs.wezterm = {
     package = if pkgs.stdenv.hostPlatform.isAarch64 then pkgs.wezterm else pkgs.pkgs-23-05.wezterm;
@@ -173,6 +166,8 @@
     bun
     lua
     hurl
+
+    asciinema
   ];
 
   home.file.backgrounds.source = ../backgrounds;
