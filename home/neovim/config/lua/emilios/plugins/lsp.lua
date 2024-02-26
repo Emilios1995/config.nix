@@ -64,9 +64,15 @@ if not configs.rescriptls then
       filetypes = {
         "rescript",
       },
-      root_dir = nvim_lsp.util.root_pattern 'relay.config.js',
+      root_dir = nvim_lsp.util.root_pattern 'bsconfig.json',
     },
-    settings = {},
+    settings = {
+      rescript = {
+        settings = {
+          askToStartBuild = false
+        }
+      },
+    },
   }
 end
 
