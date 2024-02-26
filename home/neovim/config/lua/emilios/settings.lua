@@ -55,3 +55,7 @@ vim.cmd("set cmdheight=0")
 --
 
 keymap.set('n', ';', ':')
+
+
+-- Disable noisy diagnostic virtual text
+vim.diagnostic.config({ virtual_text = false })

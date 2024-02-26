@@ -110,7 +110,6 @@ ls.setup({
   },
 })
 
-require("luasnip.loaders.from_lua").load({ paths = { "$XDG_CONFIG_HOME/nvim/lua/emilios/snippets" } })
 
 local cmp = require("cmp")
 
@@ -198,8 +197,6 @@ cmp.setup(
 )
 
 ---@diagnostic enable: redundant-parameter
-
-require("luasnip.loaders.from_lua").load({ paths = "~/.config/nix/home/neovim/config/snippets" })
 
 vim.keymap.set({ "i" }, "<C-k>", function() ls.expand() end, { silent = true })
 

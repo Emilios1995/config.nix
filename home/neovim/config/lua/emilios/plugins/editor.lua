@@ -77,37 +77,37 @@ vim.keymap.set({ 'n', 't' }, '<C-l>', '<CMD>NavigatorRight<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-k>', '<CMD>NavigatorUp<CR>')
 vim.keymap.set({ 'n', 't' }, '<C-j>', '<CMD>NavigatorDown<CR>')
 
--- require('copilot').setup({
---   panel = {
---     enabled = false,
---   },
---   suggestion = {
---     enabled = true,
---     auto_trigger = true,
---     debounce = 75,
---     keymap = {
---       accept = "<tab>",
---       accept_word = false,
---       accept_line = false,
---       next = "<M-]>",
---       prev = "<M-[>",
---       dismiss = "<C-]>",
---     },
---   },
---   filetypes = {
---     yaml = false,
---     markdown = false,
---     help = false,
---     gitcommit = false,
---     gitrebase = false,
---     hgcommit = false,
---     svn = false,
---     cvs = false,
---     ["."] = false,
---   },
---   copilot_node_command = 'node', -- Node.js version must be > 16.x
---   server_opts_overrides = {},
--- })
+require('copilot').setup({
+  panel = {
+    enabled = false,
+  },
+  suggestion = {
+    enabled = true,
+    auto_trigger = false,
+    debounce = 75,
+    keymap = {
+      accept_word = "<C-G>w",
+      accept_line = "<C-G>l",
+      next = "<M-]>",
+      prev = "<M-[>",
+      dismiss = "<C-]>",
+    },
+  },
+  filetypes = {
+    yaml = false,
+    markdown = false,
+    help = false,
+    gitcommit = false,
+    gitrebase = false,
+    hgcommit = false,
+    svn = false,
+    cvs = false,
+    ["."] = false,
+    ["no-neck-pain"] = false,
+  },
+  copilot_node_command = 'node', -- Node.js version must be > 16.x
+  server_opts_overrides = {},
+})
 
 -- copy GitHub URLs to clipboard
 require "gitlinker".setup()
