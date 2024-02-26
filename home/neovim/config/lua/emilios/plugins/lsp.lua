@@ -56,26 +56,6 @@ if not configs.rescript_relay_lsp then
   }
 end
 
-
-if not configs.rescriptls then
-  configs.rescriptls = {
-    default_config = {
-      cmd = { "npx", "@rescript/language-server", "--stdio" },
-      filetypes = {
-        "rescript",
-      },
-      root_dir = nvim_lsp.util.root_pattern 'bsconfig.json',
-    },
-    settings = {
-      rescript = {
-        settings = {
-          askToStartBuild = false
-        }
-      },
-    },
-  }
-end
-
 local servers = {
   clangd = mk_server(),
   rust_analyzer = mk_server(),
@@ -84,7 +64,9 @@ local servers = {
   graphql = mk_server(),
   hls = mk_server(),
   nil_ls = mk_server(),
-  rescriptls = mk_server(),
+  rescriptls = mk_server {
+    cmd = { "npx", "@rescript/language-server", "--stdio" }
+  },
   tailwindcss = mk_server {
     settings = {
       tailwindCSS = {
