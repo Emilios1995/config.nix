@@ -86,6 +86,7 @@ require('copilot').setup({
     auto_trigger = false,
     debounce = 75,
     keymap = {
+      accept = "<tab>",
       accept_word = "<C-G>w",
       accept_line = "<C-G>l",
       next = "<M-]>",
