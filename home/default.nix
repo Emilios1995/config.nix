@@ -134,7 +134,6 @@
     (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin google-cloud-sdk.components.pubsub-emulator ]))
     kubectl
     google-cloud-sql-proxy
-    graphite-cli
 
     nodePackages.typescript
     nodePackages.pnpm
@@ -168,6 +167,8 @@
     hurl
 
     asciinema
+
+    tree-sitter
   ];
 
   home.file.backgrounds.source = ../backgrounds;

@@ -18,12 +18,14 @@ in
     "watchman"
     "kubefwd"
     "opam"
+    "graphite"
   ];
 
   homebrew.taps = [
     "homebrew/cask-versions"
     "homebrew/services"
     "txn2/tap"
+    "withgraphite/tap"
   ];
 
   # If an app isn't available in the Mac App Store install the Homebrew Cask.
