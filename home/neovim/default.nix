@@ -53,6 +53,7 @@ with lib;
        p.typescript-tools-nvim
        e.gen-nvim
        p.telescope-ui-select-nvim
+       e.telescope-luasnip-nvim
     ];
 
     extraPackages = 

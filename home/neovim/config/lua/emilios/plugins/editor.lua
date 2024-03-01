@@ -51,6 +51,8 @@ telescope.setup {
 telescope.load_extension 'fzf'
 telescope.load_extension 'live_grep_args'
 telescope.load_extension 'ui-select'
+telescope.load_extension 'luasnip'
+telescope.load_extension 'grapple'
 
 local builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>sf', builtin.find_files, {})
@@ -63,10 +65,13 @@ vim.keymap.set('n', '<leader>lr', builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>lci', builtin.lsp_incoming_calls, {})
 vim.keymap.set('n', '<leader>lco', builtin.lsp_outgoing_calls, {})
 vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, {})
-vim.keymap.set('n', '<leader>lS', builtin.lsp_workspace_symbols, {})
+vim.keymap.set('n', '<leader>lS', builtin.lsp_dynamic_workspace_symbols, {})
 vim.keymap.set('n', '<leader>li', builtin.lsp_implementations, {})
 vim.keymap.set('n', '<leader>ld', builtin.lsp_definitions, {})
 vim.keymap.set('n', '<leader>lt', builtin.lsp_type_definitions, {})
+
+vim.keymap.set('n', '<leader>st', telescope.extensions.grapple.tags, {})
+vim.keymap.set('n', '<leader>ss', telescope.extensions.luasnip.luasnip, {})
 
 
 -- navigation between vim panes and tmux
