@@ -278,6 +278,7 @@ require('gen').setup({
   debug = false -- Prints errors and the command which is run.
 })
 
+-- Linting
 
 require('lint').linters_by_ft = {
   javascript = {
@@ -302,3 +303,45 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
     end
   end,
 })
+
+-- Formatting
+
+local util = require("conform.util")
+
+require("conform").setup({
+  formatters = {
+    ["rescript-format"] = {
+      command = util.from_node_modules("rescript"),
+    },
+    injected = {
+      lang_to_ext = {
+        graphql = "graphql"
+      }
+    }
+  },
+  formatters_by_ft = {
+    lua = { "stylua" },
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescriptreact = { "prettier" },
+    rescript = { "rescript-format", "injected" },
+    graphql = { "prettier" },
+  },
+  log_level = vim.log.levels.DEBUG,
+})
+
+vim.api.nvim_create_user_command("Format", function(args)
+  local range = nil
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+    range = {
+      start = { args.line1, 0 },
+      ["end"] = { args.line2, end_line:len() },
+    }
+  end
+  require("conform").format({ async = true, lsp_fallback = true, range = range })
+end, { range = true })
+
+-- bind to leader f
+vim.keymap.set("n", "<leader>f", "<CMD>Format<CR>", { desc = "Format" })

@@ -21,7 +21,6 @@ with lib;
        }
        e.nvim-treesitter-textobjects
        e.nvim-lspconfig
-       e.null-ls-nvim
        e.trouble-nvim
        e.oil-nvim
        e.telescope-nvim
@@ -55,6 +54,7 @@ with lib;
        p.telescope-ui-select-nvim
        e.telescope-luasnip-nvim
        e.nvim-lint
+       e.conform-nvim
     ];
 
     extraPackages = 

@@ -16,12 +16,6 @@ local default_on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '<leader>f', function()
-    vim.lsp.buf.format({
-      async = true,
-      filter = function(client_) return client_.name ~= "tsserver" end
-    })
-  end, opts)
 end
 
 local mk_server = function(config)
@@ -110,18 +104,6 @@ local servers = {
 for server, config in pairs(servers) do
   nvim_lsp[server].setup(config)
 end
-
-local null_ls = require 'null-ls'
-
-null_ls.setup({
-  on_attach = default_on_attach,
-  sources = {
-    null_ls.builtins.formatting.prettier.with({
-      cmd = 'pnpm prettier'
-    })
-  },
-  update_in_insert = false,
-})
 
 
 require("typescript-tools").setup {
