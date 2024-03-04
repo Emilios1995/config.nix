@@ -54,6 +54,7 @@ with lib;
        e.gen-nvim
        p.telescope-ui-select-nvim
        e.telescope-luasnip-nvim
+       e.nvim-lint
     ];
 
     extraPackages = 
