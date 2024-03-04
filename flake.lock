@@ -751,23 +751,6 @@
         "type": "github"
       }
     },
-    "nvim-treesitter-rescript": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1707101225,
-        "narHash": "sha256-QThfIL3cnP17NUtkvbYKGI+iTEX/8LJl+vnO9z/uHgw=",
-        "owner": "Emilios1995",
-        "repo": "nvim-treesitter-rescript",
-        "rev": "9f504103e5776824672c05c5d2d485de674732ad",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Emilios1995",
-        "ref": "9f504103e5776824672c05c5d2d485de674732ad",
-        "repo": "nvim-treesitter-rescript",
-        "type": "github"
-      }
-    },
     "parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -849,7 +832,6 @@
         "nixpkgs-23-05": "nixpkgs-23-05",
         "nixpkgs-23-11": "nixpkgs-23-11",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "nvim-treesitter-rescript": "nvim-treesitter-rescript",
         "rose-pine-tmux": "rose-pine-tmux",
         "sg-nvim": "sg-nvim",
         "t-smart-tmux-session-manager": "t-smart-tmux-session-manager",
@@ -1038,15 +1020,15 @@
     "tree-sitter-rescript": {
       "flake": false,
       "locked": {
-        "lastModified": 1686399124,
-        "narHash": "sha256-6wEJLLkwHaezVXwkQK/yPnjoU2MWijjT3+RAyDaXuJA=",
-        "owner": "nkrkv",
+        "lastModified": 1709513394,
+        "narHash": "sha256-Niz0f9w7XZHo/c2QwlM0P8JOmiSdfN7Tfuh3bRJ2JRA=",
+        "owner": "Emilios1995",
         "repo": "tree-sitter-rescript",
-        "rev": "6376fa028f31aa4e26ca2c8f007e322cd2a5eb4a",
+        "rev": "c37919995c67bdd4d1f6a77bcb3806652d61d1ac",
         "type": "github"
       },
       "original": {
-        "owner": "nkrkv",
+        "owner": "Emilios1995",
         "repo": "tree-sitter-rescript",
         "type": "github"
       }

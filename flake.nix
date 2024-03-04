@@ -20,12 +20,7 @@
     };
 
     tree-sitter-rescript = {
-     url = "github:nkrkv/tree-sitter-rescript";
-     flake = false;
-    };
-
-    nvim-treesitter-rescript = {
-     url = "github:Emilios1995/nvim-treesitter-rescript?ref=9f504103e5776824672c05c5d2d485de674732ad";
+     url = "github:Emilios1995/tree-sitter-rescript";
      flake = false;
     };
 
@@ -144,21 +139,20 @@
 
         nvim = final: prev: {
           vimPlugins = prev.vimPlugins.extend (vfinal: vprev: {
-            "nvim-treesitter-rescript" = final.vimUtils.buildVimPluginFrom2Nix {
-              pname = "nvim-treesitter-rescript";
-              version = inputs.nvim-treesitter-rescript.lastModifiedDate;
-              src = inputs.nvim-treesitter-rescript;
-            };
+             "tree-sitter-rescript" = final.vimUtils.buildVimPluginFrom2Nix {
+               pname = "tree-sitter-rescript";
+               version = inputs.tree-sitter-rescript.lastModifiedDate;
+               src = inputs.tree-sitter-rescript;
+             };
             sg-nvim = inputs.sg-nvim.packages.${prev.system}.sg-nvim;  
         });
 
          tree-sitter-grammars = prev.tree-sitter-grammars  // {
            tree-sitter-rescript = final.tree-sitter.buildGrammar {
-              version = inputs.nvim-treesitter-rescript.lastModifiedDate;
-              src = inputs.nvim-treesitter-rescript;
+              version = inputs.tree-sitter-rescript.lastModifiedDate;
+              src = inputs.tree-sitter-rescript;
               language = "rescript";
-              #generate = true;
-              location  = "tree-sitter-rescript";
+              generate = true;
            };
          };
         };

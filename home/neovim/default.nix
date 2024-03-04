@@ -27,7 +27,7 @@ with lib;
        e.telescope-nvim
        p.telescope-fzf-native-nvim
        p.telescope-live-grep-args-nvim
-       p.nvim-treesitter-rescript
+       p.tree-sitter-rescript
        p.Navigator-nvim # navigate between nvim and tmux
        e.copilot-lua
        #e.copilot-vim
