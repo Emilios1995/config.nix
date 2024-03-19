@@ -4,6 +4,7 @@ local configs = require('lspconfig.configs')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local default_on_attach = function(client, bufnr)
+  client.server_capabilities.semanticTokensProvider = nil
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.MiniCompletion.completefunc_lsp')
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -32,6 +33,7 @@ local mk_server = function(config)
     filetypes = config.filetypes,
     root_dir = config.root_dir,
     settings = config.settings,
+    init_options = config.init_options,
     capabilities = capabilities
   }
 end
@@ -59,7 +61,13 @@ local servers = {
   hls = mk_server(),
   nil_ls = mk_server(),
   rescriptls = mk_server {
-    cmd = { "npx", "@rescript/language-server", "--stdio" }
+    cmd = { "npx", "@rescript/language-server@1.44.0", "--stdio" },
+    init_options = {
+      extensionConfiguration = {
+        askToStartBuild = false,
+        incrementalTypechecking = { debugLogging = true, enabled = false }
+      }
+    },
   },
   tailwindcss = mk_server {
     settings = {

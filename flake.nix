@@ -24,6 +24,10 @@
      flake = false;
     };
 
+    tree-sitter-tailwind = {
+     url = "git+ssh://git@github.com/Emilios1995/tree-sitter-tailwind?ref=main";
+    };
+
     sg-nvim.url = "github:sourcegraph/sg.nvim";
 
 
@@ -137,6 +141,10 @@
           };
         };
 
+       tree-sitter-tailwind = final: prev: {
+          tree-sitter-tailwind = inputs.tree-sitter-tailwind.packages.${prev.system}.default;
+        };
+
         nvim = final: prev: {
           vimPlugins = prev.vimPlugins.extend (vfinal: vprev: {
              "tree-sitter-rescript" = final.vimUtils.buildVimPluginFrom2Nix {
@@ -154,12 +162,14 @@
               language = "rescript";
               generate = true;
            };
+           tree-sitter-tailwind = final.tree-sitter-tailwind;
          };
         };
 
        sg-nvim = final: prev: {
           sg-nvim = inputs.sg-nvim.packages.${prev.system}.default;
         };
+
 
        tmux = final: prev: { 
         tmuxPlugins = prev.tmuxPlugins // {

@@ -16,6 +16,7 @@ with lib;
        {
          plugin = (p.nvim-treesitter.withPlugins (_: (
            [ pkgs.tree-sitter-grammars.tree-sitter-rescript ]
+           ++ [ pkgs.tree-sitter-grammars.tree-sitter-tailwind ]
            ++ p.nvim-treesitter.allGrammars)
            ));
        }
@@ -55,6 +56,7 @@ with lib;
        e.telescope-luasnip-nvim
        e.nvim-lint
        e.conform-nvim
+       p.nvim-web-devicons
     ];
 
     extraPackages = 

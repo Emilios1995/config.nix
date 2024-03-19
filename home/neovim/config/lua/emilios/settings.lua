@@ -44,11 +44,11 @@ o.smartcase = true
 o.signcolumn = 'yes'
 
 -- theme
-vim.cmd('colorscheme rose-pine')
+vim.cmd('colorscheme rose-pine-dawn')
 
 o.termguicolors = true
-vim.api.nvim_set_hl(0, "NormalNC", { guibg = NONE, ctermbg = NONE })
-vim.api.nvim_set_hl(0, "Normal", { guibg = NONE, ctermbg = NONE })
+--vim.api.nvim_set_hl(0, "NormalNC", { guibg = NONE, ctermbg = NONE })
+--vim.api.nvim_set_hl(0, "Normal", { guibg = NONE, ctermbg = NONE })
 
 vim.cmd("set cmdheight=0")
 -- General keymaps

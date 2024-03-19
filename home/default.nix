@@ -39,7 +39,7 @@
     local config = {}
     config = wezterm.config_builder()
 
-    config.color_scheme = 'rose-pine'
+    config.color_scheme = 'rose-pine-dawn'
 
     config.use_fancy_tab_bar = false
     config.tab_bar_at_bottom = true
@@ -48,7 +48,7 @@
     -- config.use_cap_height_to_scale_fallback_fonts = true;
     config.font = wezterm.font "PragmataPro Mono Liga"
     config.line_height = 1.5
-    config.font_size = 14.5
+    config.font_size = 16
 
     config.background = {
       {

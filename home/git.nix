@@ -93,7 +93,7 @@
     settings = {
       git.paging = {
         colorArg= "always";
-        pager = "delta --dark --paging=never";
+        pager = "delta --syntax-theme OneHalfLight  --paging=never";
       };
     };
   };
