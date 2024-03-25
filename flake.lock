@@ -1070,15 +1070,16 @@
     "tree-sitter-rescript": {
       "flake": false,
       "locked": {
-        "lastModified": 1709513394,
-        "narHash": "sha256-Niz0f9w7XZHo/c2QwlM0P8JOmiSdfN7Tfuh3bRJ2JRA=",
+        "lastModified": 1711334371,
+        "narHash": "sha256-8X4/8RPRgy3WMwFfMwkpbeLWuS0WO62ickm9CTFB2xo=",
         "owner": "Emilios1995",
         "repo": "tree-sitter-rescript",
-        "rev": "c37919995c67bdd4d1f6a77bcb3806652d61d1ac",
+        "rev": "779f4fc363cba2369df9e42e1fd269efb23bb867",
         "type": "github"
       },
       "original": {
         "owner": "Emilios1995",
+        "ref": "highlight-fixes",
         "repo": "tree-sitter-rescript",
         "type": "github"
       }

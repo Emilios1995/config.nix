@@ -39,16 +39,17 @@
     local config = {}
     config = wezterm.config_builder()
 
-    config.color_scheme = 'rose-pine-dawn'
+    config.color_scheme = 'Catppuccin Latte'
 
     config.use_fancy_tab_bar = false
     config.tab_bar_at_bottom = true
     config.hide_tab_bar_if_only_one_tab = true
 
     -- config.use_cap_height_to_scale_fallback_fonts = true;
-    config.font = wezterm.font "PragmataPro Mono Liga"
+    config.font = wezterm.font ("PragmataPro Mono Liga", {weight = 'Medium'})
     config.line_height = 1.5
-    config.font_size = 16
+    config.font_size = 15
+    config.front_end = "WebGpu"
 
     config.background = {
       {

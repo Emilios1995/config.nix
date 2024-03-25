@@ -20,7 +20,7 @@
     };
 
     tree-sitter-rescript = {
-     url = "github:Emilios1995/tree-sitter-rescript";
+     url = "github:Emilios1995/tree-sitter-rescript?ref=highlight-fixes";
      flake = false;
     };
 

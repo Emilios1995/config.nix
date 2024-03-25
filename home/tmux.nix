@@ -13,12 +13,12 @@
       vim-tmux-navigator
       pain-control
       t-smart-tmux-session-manager
-      rose-pine
+      catppuccin
     ];
 
     extraConfig = ''
       set -as terminal-features ",xterm-256color:RGB"
-      set -g @rose_pine_variant 'dawn'
+      set -g @catppuccin_flavour 'latte'
       bind -T copy-mode-vi 'v' send -X begin-selection
       bind -T copy-mode-vi 'y' send -X copy-selection-and-cancel
       bind-key G new-window -n lazygit -c "#{pane_current_path}" direnv exec . lazygit

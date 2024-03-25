@@ -57,6 +57,7 @@ with lib;
        e.nvim-lint
        e.conform-nvim
        p.nvim-web-devicons
+       e.catppuccin
     ];
 
     extraPackages = 

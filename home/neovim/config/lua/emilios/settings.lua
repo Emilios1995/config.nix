@@ -44,7 +44,7 @@ o.smartcase = true
 o.signcolumn = 'yes'
 
 -- theme
-vim.cmd('colorscheme rose-pine-dawn')
+vim.cmd('colorscheme catppuccin-latte')
 
 o.termguicolors = true
 --vim.api.nvim_set_hl(0, "NormalNC", { guibg = NONE, ctermbg = NONE })
