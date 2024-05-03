@@ -61,11 +61,11 @@ local servers = {
   hls = mk_server(),
   nil_ls = mk_server(),
   rescriptls = mk_server {
-    cmd = { "npx", "@rescript/language-server@1.44.0", "--stdio" },
+    cmd = { "npx", "@rescript/language-server@1.50.0", "--stdio" },
     init_options = {
       extensionConfiguration = {
         askToStartBuild = false,
-        incrementalTypechecking = { debugLogging = true, enabled = false }
+        incrementalTypechecking = { debugLogging = false, enabled = true }
       }
     },
   },

@@ -17,6 +17,13 @@
     syntaxHighlighting = {
       enable = true;
     };
+    plugins = [
+      {
+        name = "vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+    ];
     initExtra = ''
       source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
     '';
@@ -92,7 +99,7 @@
 
   programs.bat = {
     enable = true;
-    config.theme = "Solarized (Dark)";
+    config.theme = "Solarized (light)";
   };
 
   programs.fzf = 

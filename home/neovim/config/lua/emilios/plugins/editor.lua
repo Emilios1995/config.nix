@@ -144,8 +144,13 @@ require("grapple").setup({
 })
 
 
-vim.keymap.set("n", "<leader>mt", require("grapple").toggle)
-vim.keymap.set("n", "<leader>mm", require("grapple").popup_tags)
+vim.keymap.set("n", "<leader>mt", function()
+  require("grapple").toggle()
+end)
+
+vim.keymap.set("n", "<leader>mm", function()
+  require("grapple").toggle_tags()
+end)
 
 vim.keymap.set("n", "<leader>mn", function()
   require("grapple").select({ key = "{name}" })

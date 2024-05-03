@@ -10,8 +10,8 @@
     delta = {
       enable = true;
       options = {
-        dark = true;
-        syntax-theme = "Nord";
+        dark = false;
+        syntax-theme = "Solarized (light)";
       };
     };
     lfs.enable = true;
