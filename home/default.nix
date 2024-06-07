@@ -177,6 +177,10 @@
     asciinema
 
     tree-sitter
+
+    cloc
+    colima
+    docker
   ];
 
   home.file.backgrounds.source = ../backgrounds;

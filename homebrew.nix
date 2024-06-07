@@ -47,5 +47,6 @@ in
     "google-chrome-canary"
     "firefox"
     "calibre"
+    "chaptgpt"
   ];
 }
