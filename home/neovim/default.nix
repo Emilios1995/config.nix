@@ -58,6 +58,7 @@ with lib;
        e.conform-nvim
        p.nvim-web-devicons
        e.catppuccin
+       e.aerial-nvim
     ];
 
     extraPackages = 

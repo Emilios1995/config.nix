@@ -332,6 +332,8 @@ require("conform").setup({
     typescriptreact = { "prettier" },
     rescript = { "rescript-format", "injected" },
     graphql = { "prettier" },
+    ocaml = { "ocamlformat" },
+    sql = { "pg_format" }
   },
   log_level = vim.log.levels.DEBUG,
 })

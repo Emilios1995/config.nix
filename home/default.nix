@@ -181,6 +181,7 @@
     cloc
     colima
     docker
+    zx
   ];
 
   home.file.backgrounds.source = ../backgrounds;

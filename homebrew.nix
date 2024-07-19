@@ -17,7 +17,6 @@ in
   homebrew.brews = [
     "watchman"
     "kubefwd"
-    "opam"
     "graphite"
   ];
 
@@ -47,6 +46,6 @@ in
     "google-chrome-canary"
     "firefox"
     "calibre"
-    "chaptgpt"
+    "chatgpt"
   ];
 }

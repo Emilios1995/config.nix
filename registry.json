@@ -1,0 +1,15 @@
+{
+  "flakes": [
+    {
+      "from": {
+        "id": "local-tree-sitter-rescript",
+        "type": "indirect"
+      },
+      "to": {
+        "type": "git",
+        "url": "file:///Users/emilio/Dev/tree-sitter-rescript-fork"
+      }
+    }
+  ],
+  "version": 2
+}

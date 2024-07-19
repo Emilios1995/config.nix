@@ -5,3 +5,37 @@ require("emilios.plugins.lsp")
 require("emilios.plugins.editor")
 
 require("emilios.snippets")
+
+
+
+local function perform_melange_replacements()
+  local replacements = {
+    { "TanNgBsBase",                       "Tan_base" },
+    { "TanNgBsNode",                       "Tan_node" },
+    { "Repromise",                         "Promise" },
+    { "Promise.wait",                      "Promise.get" },
+    { "Promise.andThen",                   "Promise.flatMap" },
+    { "|> Promise\\.",                     "|. Promise." },
+    { "%bs",                               "%mel" },
+    { "TanNgBsGcp",                        "Gcp" },
+    { "TanClient",                         "Common_client" },
+    { "module Pgp = TanNgBsPgPromise.Pgp", "" },
+    { "Promise.Rejectable.toJsPromise",    "Promise.Js.toBsPromise" },
+    { "Promise.Rejectable",                "Promise.Js" },
+    { "Null_undefined",                    "Nullable" }
+  }
+
+  -- Perform the replacements
+  for _, replacement in ipairs(replacements) do
+    local old_pattern = replacement[1]
+    local new_pattern = replacement[2]
+    vim.cmd(string.format("%%s/%s/%s/ge", old_pattern, new_pattern))
+  end
+end
+
+-- Define a custom command to call the function
+vim.api.nvim_create_user_command(
+  'MelangeReplacements',
+  function() perform_melange_replacements() end,
+  { nargs = 0 }
+)
