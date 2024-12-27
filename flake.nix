@@ -188,7 +188,7 @@
       };
       };
 
-      nvim-nightly = inputs.neovim-nightly-overlay.overlay;
+      nvim-nightly = inputs.neovim-nightly-overlay.overlays.default;
     };
 
  };

@@ -52,4 +52,8 @@
   };
 
   environment.etc."rescript-vscode".source = "${pkgs.vscode-marketplace.chenglou92.rescript-vscode}";
+
+  system.stateVersion = 5;
+
+  ids.gids.nixbld = 30000;
 }

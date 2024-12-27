@@ -150,7 +150,7 @@
 
     ghc
     hlint
-    haskellPackages.cabal-install
+    #haskellPackages.cabal-install
     haskellPackages.hoogle
     haskellPackages.implicit-hie
     haskellPackages.cabal-fmt
@@ -158,7 +158,7 @@
     #pkgs-23-05.haskellPackages.cabal-hoogle
 
     ocamlPackages.ocaml-lsp
-    ocamlPackages.ocamlformat_0_23_0
+    #ocamlPackages.ocamlformat_0_23_0
 
 
     cargo

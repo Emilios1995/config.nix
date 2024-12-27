@@ -43,7 +43,7 @@ in
     "loom"
     "tidal"
     "google-chrome"
-    "google-chrome-canary"
+    #"google-chrome-canary"
     "firefox"
     "calibre"
     "chatgpt"
