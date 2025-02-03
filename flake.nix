@@ -80,6 +80,7 @@
           { networking.hostName = "emilios-mac-studio"; }
           # `home-manager` module
           home-manager.darwinModules.home-manager
+          agenix.darwinModules.default
           {
             nixpkgs = nixpkgsConfig;
             # `home-manager` config
@@ -99,6 +100,7 @@
           { networking.hostName = "emilios-macbook-pro"; }
           # `home-manager` module
           home-manager.darwinModules.home-manager
+          agenix.darwinModules.default
           {
             nixpkgs = nixpkgsConfig;
             # `home-manager` config
