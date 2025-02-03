@@ -14,10 +14,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    agenix.inputs.darwin.follows = "darwin";
 
     tree-sitter-rescript = {
      url = "flake:local-tree-sitter-rescript";
@@ -38,9 +37,10 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, darwin, nixpkgs-23-05, nixpkgs-23-11, home-manager, ... }@inputs:
+  outputs = { self, darwin, nixpkgs-23-05, nixpkgs-23-11, home-manager, agenix, flake-utils, ... }@inputs:
   let 
 
     inherit (darwin.lib) darwinSystem;
@@ -61,6 +61,7 @@
           ./configuration.nix
           # `home-manager` module
           home-manager.darwinModules.home-manager
+          agenix.darwinModules.default
           {
             nixpkgs = nixpkgsConfig;
             # `home-manager` config
@@ -78,6 +79,7 @@
           { networking.hostName = "emilios-mac-studio"; }
           # `home-manager` module
           home-manager.darwinModules.home-manager
+          agenix.darwinModules.default
           {
             nixpkgs = nixpkgsConfig;
             # `home-manager` config
@@ -96,6 +98,7 @@
           { networking.hostName = "emilios-macbook-pro"; }
           # `home-manager` module
           home-manager.darwinModules.home-manager
+          agenix.darwinModules.default
           {
             nixpkgs = nixpkgsConfig;
             # `home-manager` config
@@ -107,7 +110,7 @@
       };
     };
 
-    # Overlays --------------------------------------------------------------- {{{
+    # Overlays --------------------------------------------------------------- 
 
     overlays = {
       # Overlays to add various packages into package set
@@ -191,5 +194,16 @@
       nvim-nightly = inputs.neovim-nightly-overlay.overlays.default;
     };
 
- };
+
+ } // flake-utils.lib.eachDefaultSystem (system:
+    let
+      pkgs =
+        import inputs.nixpkgs-unstable { inherit (nixpkgsConfig) config overlays; inherit system; };
+    in
+    {
+      legacyPackages = pkgs;
+      devShell = pkgs.mkShell {
+        packages = [ agenix.packages.${system}.default ];
+      };
+    });
 }
