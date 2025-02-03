@@ -182,6 +182,8 @@
     colima
     docker
     zx
+
+    pgcli
   ];
 
   home.file.backgrounds.source = ../backgrounds;
@@ -195,5 +197,7 @@
        github.copilot-chat
     ];
   };
-
+  xdg.configFile."pgcli/config".source = ./pgcli;
 }
+
+
