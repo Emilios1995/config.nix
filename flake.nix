@@ -74,12 +74,12 @@
       emilios-mac-studio = darwinSystem {
         system = "aarch64-darwin";
         modules = [ 
+          agenix.darwinModules.default
           # Main `nix-darwin` config
           ./configuration.nix
           { networking.hostName = "emilios-mac-studio"; }
           # `home-manager` module
           home-manager.darwinModules.home-manager
-          agenix.darwinModules.default
           {
             nixpkgs = nixpkgsConfig;
             # `home-manager` config
@@ -93,12 +93,12 @@
       emilios-macbook-pro = darwinSystem {
         system = "x86_64-darwin";
         modules = [ 
+          agenix.darwinModules.default
           # Main `nix-darwin` config
           ./configuration.nix
           { networking.hostName = "emilios-macbook-pro"; }
           # `home-manager` module
           home-manager.darwinModules.home-manager
-          agenix.darwinModules.default
           {
             nixpkgs = nixpkgsConfig;
             # `home-manager` config

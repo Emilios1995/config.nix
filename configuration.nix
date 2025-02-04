@@ -56,4 +56,13 @@
   system.stateVersion = 5;
 
   ids.gids.nixbld = 30000;
+
+  age.secrets = {
+    test = {
+      file = ./secrets/test.age;
+      path = "/Users/emilio/agenix-test";
+      mode = "700";
+      owner = "emilio";
+    };
+  };
 }
