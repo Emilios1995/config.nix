@@ -39,7 +39,7 @@ in
     "slack"
     "1password"
     "notion"
-    "whatsapp-beta"
+    "whatsapp"
     "loom"
     "tidal"
     "google-chrome"
