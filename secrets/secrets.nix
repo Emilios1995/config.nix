@@ -3,5 +3,5 @@ let
    macStudio = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKH0TN+dcZQIO1L2zN6xZMizPve7MDGlLPnwLEINiIpd";
 in
 {
-  "test.age".publicKeys = [ macbookPro ];
+  "test.age".publicKeys = [ macbookPro macStudio ];
 }
