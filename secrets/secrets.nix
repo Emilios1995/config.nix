@@ -1,5 +1,6 @@
 let
-   macbookPro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA9gk0E7LLw6c1U0q4bXJ4OpPWtGRcoh8VeS9lIzMY35";
+   macbookPro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILoCNAHItQffIsnsZ68U+6OpvBb4tl2+aLUSea61t46u";
+   macStudio = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKH0TN+dcZQIO1L2zN6xZMizPve7MDGlLPnwLEINiIpd";
 in
 {
   "test.age".publicKeys = [ macbookPro ];

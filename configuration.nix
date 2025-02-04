@@ -65,4 +65,6 @@
       owner = "emilio";
     };
   };
+
+  age.identityPaths = ["/Users/emilio/.ssh/id_ed25519"];
 }
