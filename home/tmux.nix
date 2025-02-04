@@ -12,7 +12,7 @@
        sensible
        vim-tmux-navigator
        pain-control
-       t-smart-tmux-session-manager
+       #t-smart-tmux-session-manager
        catppuccin
      ];
 
@@ -24,6 +24,16 @@
        bind-key G new-window -n lazygit -c "#{pane_current_path}" direnv exec . lazygit
        bind-key A switch-client -l
        set -g default-command '$SHELL'
+       bind-key "T" run-shell "sesh connect $(
+        sesh list -tz | fzf-tmux -p 55%,60% \
+          --no-sort --border-label ' sesh ' --prompt '⚡  ' \
+          --header '  ^a all ^t tmux ^x zoxide ^f find' \
+          --bind 'tab:down,btab:up' \
+          --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' \
+          --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' \
+          --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' \
+          --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)'
+        )"
      '';
   };
 }

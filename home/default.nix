@@ -182,6 +182,8 @@
     colima
     docker
     zx
+
+    sesh
   ];
 
   home.file.backgrounds.source = ../backgrounds;
