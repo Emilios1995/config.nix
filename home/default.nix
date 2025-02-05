@@ -6,6 +6,7 @@
     ./neovim
     ./tmux.nix
     ./starship
+    ./aider
   ];
 
   home.stateVersion = "23.11";
@@ -184,6 +185,8 @@
     zx
 
     sesh
+
+    aider-chat
   ];
 
   home.file.backgrounds.source = ../backgrounds;

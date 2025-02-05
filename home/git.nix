@@ -81,6 +81,7 @@
       ".direnv/"
       ".vim-bookmarks"
       ".devenv/"
+      ".aider*"
     ];
   };
 

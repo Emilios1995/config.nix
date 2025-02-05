@@ -4,4 +4,5 @@ let
 in
 {
   "test.age".publicKeys = [ macbookPro macStudio ];
+  "aider.env.age".publicKeys = [macbookPro macStudio];
 }

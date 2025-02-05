@@ -64,6 +64,12 @@
       mode = "700";
       owner = "emilio";
     };
+    "aider.env" = {
+      file = ./secrets/aider.env.age;
+      path = "/Users/emilio/.aider.env";
+      mode = "700";
+      owner = "emilio";
+    };
   };
 
   age.identityPaths = ["/Users/emilio/.ssh/id_ed25519"];
