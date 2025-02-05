@@ -46,7 +46,7 @@
     local config = {}
     config = wezterm.config_builder()
 
-    config.color_scheme = 'Catppuccin Latte'
+    config.color_scheme = 'Catppuccin Mocha'
 
     config.use_fancy_tab_bar = false
     config.tab_bar_at_bottom = true
@@ -71,7 +71,7 @@
         },
         width = '100%',
         height = '100%',
-        opacity = 0.90
+        opacity = 0.94
       }
     }
 
@@ -99,7 +99,7 @@
 
   programs.bat = {
     enable = true;
-    config.theme = "Solarized (light)";
+    config.theme = "Solarized (dark)";
   };
 
   programs.fzf = 

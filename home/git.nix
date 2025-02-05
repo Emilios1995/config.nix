@@ -11,7 +11,7 @@
       enable = true;
       options = {
         dark = false;
-        syntax-theme = "Solarized (light)";
+        syntax-theme = "Solarized (dark)";
       };
     };
     lfs.enable = true;
@@ -93,7 +93,7 @@
     settings = {
       git.paging = {
         colorArg= "always";
-        pager = "delta --syntax-theme OneHalfLight  --paging=never";
+        pager = "delta --syntax-theme OneHalfDark --paging=never";
       };
     };
   };
