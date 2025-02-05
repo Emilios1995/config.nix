@@ -266,6 +266,12 @@ require("noice").setup({
   }
 })
 
+vim.keymap.set("i", "<C-e>", function()
+  local nldocs = require("noice.lsp.docs")
+  local message = nldocs.get("signature")
+  nldocs.hide(message)
+end)
+
 require('gen').setup({
   model = "mixtral:instruct", -- The default model to use.
   display_mode = "float",     -- The display mode. Can be "float" or "split".
