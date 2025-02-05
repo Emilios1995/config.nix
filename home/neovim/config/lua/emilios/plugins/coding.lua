@@ -118,7 +118,7 @@ cmp.setup(
   {
     completion = {
       completeopt = "menu,menuone,noinsert",
-      autocomplete = false
+      --autocomplete = true
     },
     snippet = {
       expand = function(args)
