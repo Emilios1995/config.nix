@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{  pkgs, ... }:
 
 {
   imports = [
@@ -7,6 +7,7 @@
     ./tmux.nix
     ./starship
     ./aider
+    ./pgcli
   ];
 
   home.stateVersion = "23.11";
@@ -143,6 +144,7 @@
     (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin google-cloud-sdk.components.pubsub-emulator ]))
     kubectl
     google-cloud-sql-proxy
+    pgcli
 
     nodePackages.typescript
     nodePackages.pnpm
@@ -187,6 +189,10 @@
     sesh
 
     aider-chat
+
+   gmp
+   pkgconf
+
   ];
 
   home.file.backgrounds.source = ../backgrounds;

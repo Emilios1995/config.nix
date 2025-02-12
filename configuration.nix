@@ -70,6 +70,12 @@
       mode = "700";
       owner = "emilio";
     };
+    pgpass = {
+      file = ./secrets/pgpass.age;
+      path = "/Users/emilio/.pgpass";
+      mode = "600";
+      owner = "emilio";
+    };
   };
 
   age.identityPaths = ["/Users/emilio/.ssh/id_ed25519"];
