@@ -31,12 +31,10 @@
     extra-platforms = lib.mkIf (pkgs.system == "aarch64-darwin") ["x86_64-darwin" "aarch64-darwin"];
   };
 
-  nix.configureBuildUsers = true;
 
   programs.nix-index.enable = true;
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  nix.enable = true;
 
 
   programs.zsh.enable = true;
