@@ -18,6 +18,8 @@ in
     "watchman"
     "kubefwd"
     "graphite"
+    "gmp"
+    "pkgconf"
   ];
 
   homebrew.taps = [
