@@ -113,6 +113,7 @@
     # Overlays --------------------------------------------------------------- 
 
     overlays = {
+      aider = (import ./overlays/aider.nix { inherit inputs; });
       # Overlays to add various packages into package set
 
       # Using this to get the latest rescript lsp from the vscode extension
