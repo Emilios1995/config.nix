@@ -59,6 +59,7 @@
     config.line_height = 1.5
     config.font_size = 15
     config.front_end = "WebGpu"
+    config.audible_bell = "Disabled"
 
     config.background = {
       {
@@ -192,6 +193,8 @@
 
    gmp
    pkgconf
+
+   claude-code
 
   ];
 
