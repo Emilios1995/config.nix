@@ -290,19 +290,28 @@ require('gen').setup({
 })
 
 -- Linting
+--
+
+require('lint').linters.oxlint.cmd = function()
+  local binary_name = "oxlint"
+  local local_binary = vim.fn.fnamemodify('./node_modules/.bin/' .. binary_name, ':p')
+  return vim.loop.fs_stat(local_binary) and local_binary or binary_name
+end
 
 require('lint').linters_by_ft = {
   javascript = {
     "eslint_d"
   },
   typescript = {
-    "eslint_d"
+    "eslint_d",
+    "oxlint"
   },
   javascriptreact = {
     "eslint_d"
   },
   typescriptreact = {
-    "eslint_d"
+    "eslint_d",
+    "oxlint"
   }
 }
 
@@ -333,9 +342,9 @@ require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
     javascript = { "prettier" },
-    typescript = { "prettier" },
+    typescript = { "biome", "prettier", stop_after_first = true },
     javascriptreact = { "prettier" },
-    typescriptreact = { "prettier" },
+    typescriptreact = { "biome", "prettier", stop_after_first = true },
     rescript = { "rescript-format", "injected" },
     graphql = { "prettier" },
     ocaml = { "ocamlformat" },
