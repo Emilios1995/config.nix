@@ -45,6 +45,8 @@ if not configs.rescript_relay_lsp then
       cmd = { "npx", "rescript-relay-compiler", "lsp" },
       filetypes = {
         "rescript",
+        "typescript",
+        "typescriptreact",
       },
       root_dir = nvim_lsp.util.root_pattern 'relay.config.js',
     },
@@ -74,8 +76,7 @@ local servers = {
       tailwindCSS = {
         experimental = {
           classRegex = {
-            { "\\bcva\\(([^)]+)\\",
-              "[\"'`]([^\"'`]*).*?[\"'`]" },
+            { "[\"'`]([^\"'`]*).*?[\"'`]" },
           },
         },
       },

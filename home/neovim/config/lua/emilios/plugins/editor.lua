@@ -345,6 +345,7 @@ require("conform").setup({
     typescript = { "biome", "prettier", stop_after_first = true },
     javascriptreact = { "prettier" },
     typescriptreact = { "biome", "prettier", stop_after_first = true },
+    json = { "biome", "prettier", stop_after_first = true },
     rescript = { "rescript-format", "injected" },
     graphql = { "prettier" },
     ocaml = { "ocamlformat" },
