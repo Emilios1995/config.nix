@@ -202,7 +202,7 @@
 
   programs.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-marketplace; [
+    profiles.default.extensions = with pkgs.vscode-marketplace; [
        gabrielnordeborn.vscode-rescript-relay
        chenglou92.rescript-vscode
        github.copilot

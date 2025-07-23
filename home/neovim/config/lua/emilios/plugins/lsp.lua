@@ -54,6 +54,15 @@ if not configs.rescript_relay_lsp then
   }
 end
 
+configs.relay_lsp = {
+  default_config = {
+    cmd = { "./node_modules/relay-compiler/macos-arm64/relay", "lsp", },
+    filetypes = { "typescript", "typescriptreact" },
+    root_dir = nvim_lsp.util.root_pattern 'relay.config.js',
+  },
+  settings = {},
+}
+
 local servers = {
   clangd = mk_server(),
   rust_analyzer = mk_server(),
@@ -107,7 +116,8 @@ local servers = {
   purescriptls = mk_server(),
   vtsls = mk_server {
     cmd = { "npx", "@vtsls/language-server", "--stdio" }
-  }
+  },
+  relay_lsp = mk_server(),
 }
 
 
