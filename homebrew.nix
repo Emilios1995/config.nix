@@ -49,5 +49,7 @@ in
     "firefox"
     "calibre"
     #"chatgpt"
+    "miniconda"
+    "macfuse"
   ];
 }
