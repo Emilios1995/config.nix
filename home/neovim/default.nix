@@ -15,8 +15,8 @@ with lib;
        e.rose-pine
        {
          plugin = (p.nvim-treesitter.withPlugins (_: (
-           [ pkgs.tree-sitter-grammars.tree-sitter-rescript ]
-           ++ [ pkgs.tree-sitter-grammars.tree-sitter-tailwind ]
+           # [ pkgs.tree-sitter-grammars.tree-sitter-rescript ]
+            [ pkgs.tree-sitter-grammars.tree-sitter-tailwind ]
            ++ p.nvim-treesitter.allGrammars)
            ));
        }
@@ -27,7 +27,7 @@ with lib;
        e.telescope-nvim
        p.telescope-fzf-native-nvim
        p.telescope-live-grep-args-nvim
-       p.tree-sitter-rescript
+       # p.tree-sitter-rescript
        p.Navigator-nvim # navigate between nvim and tmux
        e.copilot-lua
        #e.copilot-vim

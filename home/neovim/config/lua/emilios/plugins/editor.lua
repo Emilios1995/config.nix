@@ -349,7 +349,8 @@ require("conform").setup({
     rescript = { "rescript-format", "injected" },
     graphql = { "prettier" },
     ocaml = { "ocamlformat" },
-    sql = { "pg_format" }
+    sql = { "pg_format" },
+    haskell = { "fourmolu" }
   },
   log_level = vim.log.levels.DEBUG,
 })

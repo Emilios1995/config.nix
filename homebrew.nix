@@ -11,7 +11,7 @@ in
 
   homebrew.enable = true;
   homebrew.brewPrefix = brewBinPrefix;
-  homebrew.onActivation.autoUpdate = true;
+  homebrew.onActivation.autoUpdate = false;
   homebrew.onActivation.cleanup = "zap";
 
   homebrew.brews = [
@@ -20,6 +20,9 @@ in
     "graphite"
     "gmp"
     "pkgconf"
+    "dbus"
+    "icu4c@77"
+    "zstd"
   ];
 
   homebrew.taps = [

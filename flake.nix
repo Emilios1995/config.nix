@@ -18,10 +18,10 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
     agenix.inputs.darwin.follows = "darwin";
 
-    tree-sitter-rescript = {
-     url = "flake:local-tree-sitter-rescript";
-     flake = false;
-    };
+    # tree-sitter-rescript = {
+    #  url = "flake:local-tree-sitter-rescript";
+    #  flake = false;
+    # };
 
     tree-sitter-tailwind = {
      url = "git+ssh://git@github.com/Emilios1995/tree-sitter-tailwind?ref=main";
@@ -151,21 +151,21 @@
 
         nvim = final: prev: {
           vimPlugins = prev.vimPlugins.extend (vfinal: vprev: {
-             "tree-sitter-rescript" = final.vimUtils.buildVimPluginFrom2Nix {
-               pname = "tree-sitter-rescript";
-               version = inputs.tree-sitter-rescript.lastModifiedDate;
-               src = inputs.tree-sitter-rescript;
-             };
+             # "tree-sitter-rescript" = final.vimUtils.buildVimPluginFrom2Nix {
+             #   pname = "tree-sitter-rescript";
+             #   version = inputs.tree-sitter-rescript.lastModifiedDate;
+             #   src = inputs.tree-sitter-rescript;
+             # };
             sg-nvim = inputs.sg-nvim.packages.${prev.system}.sg-nvim;  
         });
 
          tree-sitter-grammars = prev.tree-sitter-grammars  // {
-           tree-sitter-rescript = final.tree-sitter.buildGrammar {
-              version = inputs.tree-sitter-rescript.lastModifiedDate;
-              src = inputs.tree-sitter-rescript;
-              language = "rescript";
-              generate = true;
-           };
+           # tree-sitter-rescript = final.tree-sitter.buildGrammar {
+           #    version = inputs.tree-sitter-rescript.lastModifiedDate;
+           #    src = inputs.tree-sitter-rescript;
+           #    language = "rescript";
+           #    generate = true;
+           # };
            tree-sitter-tailwind = final.tree-sitter-tailwind;
          };
         };

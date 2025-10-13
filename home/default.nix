@@ -195,6 +195,7 @@
    pkgconf
 
    claude-code
+   yq
 
   ];
 
