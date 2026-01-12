@@ -89,7 +89,13 @@ local servers = {
       }
     },
   },
-  tailwindcss = mk_server(),
+  tailwindcss = mk_server {
+    settings = {
+      tailwindCSS = {
+        colorDecorators = false
+      }
+    }
+  },
   lua_ls = mk_server {
     settings = {
       Lua = {
