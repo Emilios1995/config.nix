@@ -9,10 +9,10 @@ with lib;
       lua require 'emilios.init'
     '';
 
-    plugins = 
+    plugins =
     let p = pkgs.vimPlugins; e = pkgs.vimExtraPlugins; in [
-       e.mini-nvim  
-       e.rose-pine
+       e.mini-nvim-nvim-mini
+       e.rose-pine-rose-pine
        {
          plugin = (p.nvim-treesitter.withPlugins (_: (
            # [ pkgs.tree-sitter-grammars.tree-sitter-rescript ]
@@ -20,45 +20,46 @@ with lib;
            ++ p.nvim-treesitter.allGrammars)
            ));
        }
-       e.nvim-treesitter-textobjects
-       e.nvim-lspconfig
-       e.trouble-nvim
-       e.oil-nvim
-       e.telescope-nvim
+       e.nvim-treesitter-textobjects-nvim-treesitter
+       e.nvim-lspconfig-neovim
+       e.trouble-nvim-folke
+       e.oil-nvim-stevearc
+       e.telescope-nvim-nvim-telescope
        p.telescope-fzf-native-nvim
        p.telescope-live-grep-args-nvim
        # p.tree-sitter-rescript
        p.Navigator-nvim # navigate between nvim and tmux
-       e.copilot-lua
+       e.copilot-lua-zbirenbaum
        #e.copilot-vim
        p.gitlinker-nvim
-       e.diffview-nvim
-       e.nvim-cmp
-       e.cmp-nvim-lsp
-       e.cmp-buffer
-       e.cmp-path
-       e.cmp-luasnip
-       e.cmp-cmdline
-       e.LuaSnip
-       e.gitsigns-nvim
+       e.diffview-nvim-sindrets
+       e.nvim-cmp-hrsh7th
+       e.cmp-nvim-lsp-hrsh7th
+       e.cmp-buffer-hrsh7th
+       e.cmp-path-hrsh7th
+       e.cmp-luasnip-saadparwaiz1
+       e.cmp-cmdline-hrsh7th
+       e.LuaSnip-L3MON4D3
+       e.gitsigns-nvim-lewis6991
        p.neogit
-       e.zen-mode-nvim
+       e.zen-mode-nvim-folke
        p.sg-nvim
-       e.no-neck-pain-nvim
-       e.grapple-nvim
+       e.no-neck-pain-nvim-shortcuts
+       e.grapple-nvim-cbochs
        p.bufjump-nvim
-       e.noice-nvim
+       e.noice-nvim-folke
        #e.nvim-notify
-       e.nui-nvim
+       e.nui-nvim-MunifTanjim
        p.typescript-tools-nvim
-       e.gen-nvim
+       e.gen-nvim-David-Kunz
        p.telescope-ui-select-nvim
-       e.telescope-luasnip-nvim
-       e.nvim-lint
-       e.conform-nvim
+       e.telescope-luasnip-nvim-benfowler
+       e.nvim-lint-mfussenegger
+       e.conform-nvim-stevearc
        p.nvim-web-devicons
-       e.catppuccin
-       e.aerial-nvim
+       e.catppuccin-catppuccin
+       e.aerial-nvim-stevearc
+       e.orgmode-nvim-orgmode
     ];
 
     extraPackages = 

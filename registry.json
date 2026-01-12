@@ -9,6 +9,17 @@
         "type": "git",
         "url": "file:///Users/emilio/Dev/tree-sitter-rescript-fork"
       }
+    },
+    {
+      "from": {
+        "id": "shinzui-templates",
+        "type": "indirect"
+      },
+      "to": {
+        "owner": "shinzui",
+        "repo": "nix-flake-templates",
+        "type": "github"
+      }
     }
   ],
   "version": 2
