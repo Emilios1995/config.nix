@@ -263,7 +263,16 @@ require("noice").setup({
         winhighlight = { Normal = "Normal", FloatBorder = "NoiceCmdlinePopupBorder" },
       },
     },
-  }
+  },
+  routes = {
+    {
+      filter = {
+        event = "msg_show",
+        kind = "search_count",
+      },
+      opts = { skip = true },
+    },
+  },
 })
 
 vim.keymap.set("i", "<C-e>", function()
