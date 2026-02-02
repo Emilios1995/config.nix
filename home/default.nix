@@ -27,6 +27,7 @@
       }
     ];
     initExtra = ''
+      export PATH="$HOME/.local/bin:$PATH"
       source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
     '';
   };
@@ -48,7 +49,7 @@
     local config = {}
     config = wezterm.config_builder()
 
-    config.color_scheme = 'Catppuccin Mocha'
+    config.color_scheme = 'Alabaster'
 
     config.use_fancy_tab_bar = false
     config.tab_bar_at_bottom = true

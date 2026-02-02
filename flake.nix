@@ -24,112 +24,152 @@
     # };
 
     tree-sitter-tailwind = {
-     url = "git+ssh://git@github.com/Emilios1995/tree-sitter-tailwind?ref=main";
+      url = "git+ssh://git@github.com/Emilios1995/tree-sitter-tailwind?ref=main";
+    };
+
+    tree-sitter-org = {
+      url = "github:nvim-orgmode/tree-sitter-org/next";
+      flake = false;
     };
 
     sg-nvim.url = "github:sourcegraph/sg.nvim";
 
+    alabaster-nvim = {
+      url = "sourcehut:~p00f/alabaster.nvim";
+      flake = false;
+    };
 
-    t-smart-tmux-session-manager = { url = "github:joshmedeski/t-smart-tmux-session-manager"; flake = false; };
-    rose-pine-tmux = { url = "github:mcanueste/rose-pine-tmux"; flake = false; };
+    t-smart-tmux-session-manager = {
+      url = "github:joshmedeski/t-smart-tmux-session-manager";
+      flake = false;
+    };
+    rose-pine-tmux = {
+      url = "github:mcanueste/rose-pine-tmux";
+      flake = false;
+    };
 
-    nixneovimplugins.url ="github:jooooscha/nixpkgs-vim-extra-plugins";
+    nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, darwin, nixpkgs-23-05, nixpkgs-23-11, home-manager, agenix, flake-utils, ... }@inputs:
-  let 
+  outputs =
+    {
+      self,
+      darwin,
+      nixpkgs-23-05,
+      nixpkgs-23-11,
+      home-manager,
+      agenix,
+      flake-utils,
+      ...
+    }@inputs:
+    let
 
-    inherit (darwin.lib) darwinSystem;
-    inherit (inputs.nixpkgs-unstable.lib) attrValues makeOverridable optionalAttrs singleton;
+      inherit (darwin.lib) darwinSystem;
+      inherit (inputs.nixpkgs-unstable.lib)
+        attrValues
+        makeOverridable
+        optionalAttrs
+        singleton
+        ;
 
-    # Configuration for `nixpkgs`
-    nixpkgsConfig = {
-      config = { allowUnfree = true; };
-      overlays = attrValues self.overlays;
-    };
-  in
-  {
-    darwinConfigurations = rec {
-      v-mac = darwinSystem {
-        system = "x86_64-darwin";
-        modules = [ 
-          # Main `nix-darwin` config
-          ./configuration.nix
-          # `home-manager` module
-          home-manager.darwinModules.home-manager
-          agenix.darwinModules.default
-          {
-            nixpkgs = nixpkgsConfig;
-            # `home-manager` config
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.emilio = { imports = [./home]; };
-          }
-        ];
+      # Configuration for `nixpkgs`
+      nixpkgsConfig = {
+        config = {
+          allowUnfree = true;
+        };
+        overlays = attrValues self.overlays;
       };
-      emilios-mac-studio = darwinSystem {
-        system = "aarch64-darwin";
-        modules = [ 
-          agenix.darwinModules.default
-          # Main `nix-darwin` config
-          ./configuration.nix
-          { networking.hostName = "emilios-mac-studio"; }
-          # `home-manager` module
-          home-manager.darwinModules.home-manager
-          {
-            nixpkgs = nixpkgsConfig;
-            # `home-manager` config
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.emilio = { imports = [./home]; };
-          }
-        ];
+    in
+    {
+      darwinConfigurations = rec {
+        v-mac = darwinSystem {
+          system = "x86_64-darwin";
+          modules = [
+            # Main `nix-darwin` config
+            ./configuration.nix
+            # `home-manager` module
+            home-manager.darwinModules.home-manager
+            agenix.darwinModules.default
+            {
+              nixpkgs = nixpkgsConfig;
+              # `home-manager` config
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.emilio = {
+                imports = [ ./home ];
+              };
+            }
+          ];
+        };
+        emilios-mac-studio = darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            agenix.darwinModules.default
+            # Main `nix-darwin` config
+            ./configuration.nix
+            { networking.hostName = "emilios-mac-studio"; }
+            # `home-manager` module
+            home-manager.darwinModules.home-manager
+            {
+              nixpkgs = nixpkgsConfig;
+              # `home-manager` config
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.emilio = {
+                imports = [ ./home ];
+              };
+            }
+          ];
 
+        };
+        emilios-macbook-pro = darwinSystem {
+          system = "x86_64-darwin";
+          modules = [
+            agenix.darwinModules.default
+            # Main `nix-darwin` config
+            ./configuration.nix
+            { networking.hostName = "emilios-macbook-pro"; }
+            # `home-manager` module
+            home-manager.darwinModules.home-manager
+            {
+              nixpkgs = nixpkgsConfig;
+              # `home-manager` config
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.emilio = {
+                imports = [ ./home ];
+              };
+            }
+          ];
+        };
       };
-      emilios-macbook-pro = darwinSystem {
-        system = "x86_64-darwin";
-        modules = [ 
-          agenix.darwinModules.default
-          # Main `nix-darwin` config
-          ./configuration.nix
-          { networking.hostName = "emilios-macbook-pro"; }
-          # `home-manager` module
-          home-manager.darwinModules.home-manager
-          {
-            nixpkgs = nixpkgsConfig;
-            # `home-manager` config
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.emilio = { imports = [./home]; };
-          }
-        ];
-      };
-    };
 
-    # Overlays --------------------------------------------------------------- 
+      # Overlays ---------------------------------------------------------------
 
-    overlays = {
-      #aider = (import ./overlays/aider.nix { inherit inputs; });
-      # Overlays to add various packages into package set
+      overlays = {
+        #aider = (import ./overlays/aider.nix { inherit inputs; });
+        # Overlays to add various packages into package set
 
-      # Using this to get the latest rescript lsp from the vscode extension
-      vscode-extensions = inputs.nix-vscode-extensions.overlays.default;
+        # Using this to get the latest rescript lsp from the vscode extension
+        vscode-extensions = inputs.nix-vscode-extensions.overlays.default;
 
-      # Regularly updated nvim plugins
-      neovim-nix = inputs.nixneovimplugins.overlays.default;
+        # Regularly updated nvim plugins
+        neovim-nix = inputs.nixneovimplugins.overlays.default;
 
-      # Overlay useful on Macs with Apple Silicon
-        apple-silicon = final: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-          # Add access to x86 packages system is running Apple Silicon
-          pkgs-x86 = import inputs.nixpkgs-unstable {
-            system = "x86_64-darwin";
-            inherit (nixpkgsConfig) config;
+        # Overlay useful on Macs with Apple Silicon
+        apple-silicon =
+          final: prev:
+          optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+            # Add access to x86 packages system is running Apple Silicon
+            pkgs-x86 = import inputs.nixpkgs-unstable {
+              system = "x86_64-darwin";
+              inherit (nixpkgsConfig) config;
+            };
           };
-        }; 
 
         pkgs-23-11 = _: prev: {
           pkgs-23-11 = import inputs.nixpkgs-23-11 {
@@ -145,66 +185,88 @@
           };
         };
 
-       tree-sitter-tailwind = final: prev: {
+        worktrunk = final: prev: {
+          worktrunk = final.callPackage (self + "/derivations/worktrunk.nix") {
+            inherit (final) lib rustPlatform fetchFromGitHub;
+          };
+        };
+
+        tree-sitter-tailwind = final: prev: {
           tree-sitter-tailwind = inputs.tree-sitter-tailwind.packages.${prev.system}.default;
         };
 
         nvim = final: prev: {
-          vimPlugins = prev.vimPlugins.extend (vfinal: vprev: {
-             # "tree-sitter-rescript" = final.vimUtils.buildVimPluginFrom2Nix {
-             #   pname = "tree-sitter-rescript";
-             #   version = inputs.tree-sitter-rescript.lastModifiedDate;
-             #   src = inputs.tree-sitter-rescript;
-             # };
-            sg-nvim = inputs.sg-nvim.packages.${prev.system}.sg-nvim;  
-        });
+          vimPlugins = prev.vimPlugins.extend (
+            vfinal: vprev: {
+              # "tree-sitter-rescript" = final.vimUtils.buildVimPluginFrom2Nix {
+              #   pname = "tree-sitter-rescript";
+              #   version = inputs.tree-sitter-rescript.lastModifiedDate;
+              #   src = inputs.tree-sitter-rescript;
+              # };
+              sg-nvim = inputs.sg-nvim.packages.${prev.system}.sg-nvim;
+              alabaster-nvim = final.vimUtils.buildVimPlugin {
+                pname = "alabaster-nvim";
+                version = inputs.alabaster-nvim.lastModifiedDate;
+                src = inputs.alabaster-nvim;
+              };
+            }
+          );
 
-         tree-sitter-grammars = prev.tree-sitter-grammars  // {
-           # tree-sitter-rescript = final.tree-sitter.buildGrammar {
-           #    version = inputs.tree-sitter-rescript.lastModifiedDate;
-           #    src = inputs.tree-sitter-rescript;
-           #    language = "rescript";
-           #    generate = true;
-           # };
-           tree-sitter-tailwind = final.tree-sitter-tailwind;
-         };
+          tree-sitter-grammars = prev.tree-sitter-grammars // {
+            # tree-sitter-rescript = final.tree-sitter.buildGrammar {
+            #    version = inputs.tree-sitter-rescript.lastModifiedDate;
+            #    src = inputs.tree-sitter-rescript;
+            #    language = "rescript";
+            #    generate = true;
+            # };
+            tree-sitter-tailwind = final.tree-sitter-tailwind;
+            tree-sitter-org = final.tree-sitter.buildGrammar {
+              version = inputs.tree-sitter-org.lastModifiedDate;
+              src = inputs.tree-sitter-org;
+              language = "org";
+              generate = true;
+            };
+          };
         };
 
-       sg-nvim = final: prev: {
+        sg-nvim = final: prev: {
           sg-nvim = inputs.sg-nvim.packages.${prev.system}.default;
         };
 
-
-       tmux = final: prev: { 
-        tmuxPlugins = prev.tmuxPlugins // {
-          t-smart-tmux-session-manager = final.tmuxPlugins.mkTmuxPlugin {
-          pluginName = "t-smart-tmux-session-manager";
-          rtpFilePath = "t-smart-tmux-session-manager.tmux";
-          src = inputs.t-smart-tmux-session-manager;
-          version = inputs.t-smart-tmux-session-manager.shortRev;
+        tmux = final: prev: {
+          tmuxPlugins = prev.tmuxPlugins // {
+            t-smart-tmux-session-manager = final.tmuxPlugins.mkTmuxPlugin {
+              pluginName = "t-smart-tmux-session-manager";
+              rtpFilePath = "t-smart-tmux-session-manager.tmux";
+              src = inputs.t-smart-tmux-session-manager;
+              version = inputs.t-smart-tmux-session-manager.shortRev;
+            };
+            rose-pine-tmux = final.tmuxPlugins.mkTmuxPlugin {
+              pluginName = "rose-pine-tmux";
+              rtpFilePath = "rose-pine-tmux.tmux";
+              src = inputs.rose-pine-tmux;
+              version = inputs.rose-pine-tmux.shortRev;
+            };
+          };
         };
-        rose-pine-tmux = final.tmuxPlugins.mkTmuxPlugin {
-          pluginName = "rose-pine-tmux";
-          rtpFilePath = "rose-pine-tmux.tmux";
-          src = inputs.rose-pine-tmux;
-          version = inputs.rose-pine-tmux.shortRev;
+
+        nvim-nightly = inputs.neovim-nightly-overlay.overlays.default;
+      };
+
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import inputs.nixpkgs-unstable {
+          inherit (nixpkgsConfig) config overlays;
+          inherit system;
         };
-      };
-      };
-
-      nvim-nightly = inputs.neovim-nightly-overlay.overlays.default;
-    };
-
-
- } // flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs =
-        import inputs.nixpkgs-unstable { inherit (nixpkgsConfig) config overlays; inherit system; };
-    in
-    {
-      legacyPackages = pkgs;
-      devShell = pkgs.mkShell {
-        packages = [ agenix.packages.${system}.default ];
-      };
-    });
+      in
+      {
+        legacyPackages = pkgs;
+        devShell = pkgs.mkShell {
+          packages = [ agenix.packages.${system}.default ];
+        };
+      }
+    );
 }

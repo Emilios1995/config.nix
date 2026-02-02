@@ -17,6 +17,7 @@ with lib;
          plugin = (p.nvim-treesitter.withPlugins (_: (
            # [ pkgs.tree-sitter-grammars.tree-sitter-rescript ]
             [ pkgs.tree-sitter-grammars.tree-sitter-tailwind ]
+            ++ [ pkgs.tree-sitter-grammars.tree-sitter-org ]
            ++ p.nvim-treesitter.allGrammars)
            ));
        }
@@ -58,6 +59,7 @@ with lib;
        e.conform-nvim-stevearc
        p.nvim-web-devicons
        e.catppuccin-catppuccin
+       p.alabaster-nvim
        e.aerial-nvim-stevearc
        e.orgmode-nvim-orgmode
     ];

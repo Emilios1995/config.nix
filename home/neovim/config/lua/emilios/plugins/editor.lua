@@ -341,6 +341,29 @@ require("conform").setup({
   formatters = {
     ["rescript-format"] = {
       command = util.from_node_modules("rescript"),
+      args = function(self, ctx)
+        local valid_extensions = {
+          res = true,
+          resi = true,
+          ml = true,
+          mli = true,
+        }
+
+        local default_extension = "res"
+
+        local extension = vim.fn.fnamemodify(ctx.filename, ":e")
+
+        local is_invalid_extension = valid_extensions[extension] == nil
+        if is_invalid_extension then
+          extension = default_extension
+        end
+
+        return {
+          "format",
+          "--stdin",
+          "." .. extension,
+        }
+      end,
     },
     injected = {
       lang_to_ext = {
@@ -390,3 +413,17 @@ parser_config.tailwind = {
     requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
   },
 }
+
+-- parser_config.org = {
+--   install_info = {
+--     url = 'https://github.com/milisims/tree-sitter-org',
+--     revision = 'next',
+--     files = { 'src/parser.c', 'src/scanner.c' },
+--   },
+--   filetype = 'org',
+-- }
+
+require('orgmode').setup({
+  org_agenda_files = '~/orgfiles/**/*',
+  org_default_notes_file = '~/orgfiles/refile.org',
+})
