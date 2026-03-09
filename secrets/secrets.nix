@@ -6,4 +6,6 @@ in
   "test.age".publicKeys = [ macbookPro macStudio ];
   "aider.env.age".publicKeys = [macbookPro macStudio];
   "pgpass.age".publicKeys = [macbookPro macStudio];
+  "cachix-authtoken.dhall.age".publicKeys = [macbookPro macStudio];
+  "nix-netrc.age".publicKeys = [macbookPro macStudio];
 }

@@ -62,6 +62,7 @@ with lib;
        p.alabaster-nvim
        e.aerial-nvim-stevearc
        e.orgmode-nvim-orgmode
+       e.markview-nvim-OXY2DEV
     ];
 
     extraPackages = 

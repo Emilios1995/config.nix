@@ -8,6 +8,7 @@
     ./starship
     ./aider
     ./pgcli
+    ./cachix.nix
   ];
 
   home.stateVersion = "23.11";
@@ -198,6 +199,7 @@
    claude-code
    yq
 
+   cachix
   ];
 
   home.file.backgrounds.source = ../backgrounds;

@@ -94,15 +94,26 @@
             # `home-manager` module
             home-manager.darwinModules.home-manager
             agenix.darwinModules.default
-            {
-              nixpkgs = nixpkgsConfig;
-              # `home-manager` config
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.emilio = {
-                imports = [ ./home ];
-              };
-            }
+            (
+              {
+                config,
+                lib,
+                pkgs,
+                ...
+              }:
+              {
+                nixpkgs = nixpkgsConfig;
+                # `home-manager` config
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {
+                  inherit (config) age;
+                };
+                home-manager.users.emilio = {
+                  imports = [ ./home ];
+                };
+              }
+            )
           ];
         };
         emilios-mac-studio = darwinSystem {
@@ -114,15 +125,26 @@
             { networking.hostName = "emilios-mac-studio"; }
             # `home-manager` module
             home-manager.darwinModules.home-manager
-            {
-              nixpkgs = nixpkgsConfig;
-              # `home-manager` config
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.emilio = {
-                imports = [ ./home ];
-              };
-            }
+            (
+              {
+                config,
+                lib,
+                pkgs,
+                ...
+              }:
+              {
+                nixpkgs = nixpkgsConfig;
+                # `home-manager` config
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {
+                  inherit (config) age;
+                };
+                home-manager.users.emilio = {
+                  imports = [ ./home ];
+                };
+              }
+            )
           ];
 
         };
@@ -135,15 +157,26 @@
             { networking.hostName = "emilios-macbook-pro"; }
             # `home-manager` module
             home-manager.darwinModules.home-manager
-            {
-              nixpkgs = nixpkgsConfig;
-              # `home-manager` config
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.emilio = {
-                imports = [ ./home ];
-              };
-            }
+            (
+              {
+                config,
+                lib,
+                pkgs,
+                ...
+              }:
+              {
+                nixpkgs = nixpkgsConfig;
+                # `home-manager` config
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {
+                  inherit (config) age;
+                };
+                home-manager.users.emilio = {
+                  imports = [ ./home ];
+                };
+              }
+            )
           ];
         };
       };

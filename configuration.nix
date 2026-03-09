@@ -19,7 +19,7 @@
       "emilio"
     ];
 
-    experimental-features=  [
+    experimental-features = [
       "ca-derivations"
       "nix-command"
       "flakes"
@@ -28,7 +28,10 @@
     keep-derivations = true;
     keep-outputs = true;
 
-    extra-platforms = lib.mkIf (pkgs.system == "aarch64-darwin") ["x86_64-darwin" "aarch64-darwin"];
+    extra-platforms = lib.mkIf (pkgs.system == "aarch64-darwin") [
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
   };
 
 
@@ -36,11 +39,10 @@
 
   nix.enable = true;
 
-
   programs.zsh.enable = true;
 
   environment.variables = {
-   EDITOR = "nvim";
+    EDITOR = "nvim";
   };
 
   users.users.emilio = {
@@ -76,7 +78,17 @@
       mode = "600";
       owner = "emilio";
     };
+    cachix-authtoken = {
+      file = ./secrets/cachix-authtoken.dhall.age;
+      mode = "700";
+      owner = "emilio";
+    };
+    nix-netrc = {
+      file = ./secrets/nix-netrc.age;
+      mode = "700";
+      owner = "emilio";
+    };
   };
 
-  age.identityPaths = ["/Users/emilio/.ssh/id_ed25519"];
+  age.identityPaths = [ "/Users/emilio/.ssh/id_ed25519" ];
 }
