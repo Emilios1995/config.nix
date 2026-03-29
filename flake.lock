@@ -634,6 +634,22 @@
         "type": "github"
       }
     },
+    "opensessions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774799492,
+        "narHash": "sha256-FLeuPjoirsAciuSt8x+WxsnXYQXiac1LM4K2IJoFZKY=",
+        "owner": "Ataraxy-Labs",
+        "repo": "opensessions",
+        "rev": "d5a8dae9bf9f4289d12e63d40d5772369136f4a4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Ataraxy-Labs",
+        "repo": "opensessions",
+        "type": "github"
+      }
+    },
     "parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -757,6 +773,7 @@
         "nixpkgs-23-05": "nixpkgs-23-05",
         "nixpkgs-23-11": "nixpkgs-23-11",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "opensessions": "opensessions",
         "rose-pine-tmux": "rose-pine-tmux",
         "sg-nvim": "sg-nvim",
         "t-smart-tmux-session-manager": "t-smart-tmux-session-manager",

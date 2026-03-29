@@ -47,6 +47,10 @@
       url = "github:mcanueste/rose-pine-tmux";
       flake = false;
     };
+    opensessions = {
+      url = "github:Ataraxy-Labs/opensessions";
+      flake = false;
+    };
 
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
 
@@ -108,6 +112,7 @@
                 home-manager.useUserPackages = true;
                 home-manager.extraSpecialArgs = {
                   inherit (config) age;
+                  inherit inputs;
                 };
                 home-manager.users.emilio = {
                   imports = [ ./home ];
@@ -139,6 +144,7 @@
                 home-manager.useUserPackages = true;
                 home-manager.extraSpecialArgs = {
                   inherit (config) age;
+                  inherit inputs;
                 };
                 home-manager.users.emilio = {
                   imports = [ ./home ];
@@ -171,6 +177,7 @@
                 home-manager.useUserPackages = true;
                 home-manager.extraSpecialArgs = {
                   inherit (config) age;
+                  inherit inputs;
                 };
                 home-manager.users.emilio = {
                   imports = [ ./home ];

@@ -1,6 +1,19 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 
+let
+  opensessionsDir = "$HOME/.tmux/plugins/opensessions";
+  opensessionsSrc = inputs.opensessions;
+in
 {
+  home.activation.opensessions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -d "${opensessionsDir}" ]; then
+      mkdir -p "${opensessionsDir}"
+    fi
+    ${pkgs.rsync}/bin/rsync -a --delete "${opensessionsSrc}/" "${opensessionsDir}/"
+    chmod -R u+w "${opensessionsDir}"
+    cd "${opensessionsDir}" && ${pkgs.bun}/bin/bun install
+  '';
+
   programs.tmux = {
     prefix = "C-a";
     enable = true;
@@ -45,6 +58,8 @@
           --preview-window 'right:55%' \
           --preview 'sesh preview {}'
       )\""
+
+      run-shell "bash ${opensessionsDir}/opensessions.tmux"
     '';
   };
 }
