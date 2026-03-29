@@ -11,12 +11,12 @@ in
 
   homebrew.enable = true;
   homebrew.brewPrefix = brewBinPrefix;
-  homebrew.onActivation.autoUpdate = false;
+  homebrew.onActivation.autoUpdate = true;
   homebrew.onActivation.cleanup = "zap";
 
   homebrew.brews = [
     "watchman"
-    "kubefwd"
+    "txn2/tap/kubefwd"
     "graphite"
     "gmp"
     "pkgconf"
