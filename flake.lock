@@ -637,11 +637,11 @@
     "opensessions": {
       "flake": false,
       "locked": {
-        "lastModified": 1774799492,
-        "narHash": "sha256-FLeuPjoirsAciuSt8x+WxsnXYQXiac1LM4K2IJoFZKY=",
+        "lastModified": 1777121973,
+        "narHash": "sha256-OBSp4/fy87BschygMcmOIddchO6CygV70W4brgovitY=",
         "owner": "Ataraxy-Labs",
         "repo": "opensessions",
-        "rev": "d5a8dae9bf9f4289d12e63d40d5772369136f4a4",
+        "rev": "1e3daf71f7124729fdb40292fa48fc9649ef4f55",
         "type": "github"
       },
       "original": {

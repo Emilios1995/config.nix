@@ -30,6 +30,9 @@
     initExtra = ''
       export PATH="$HOME/.local/bin:$PATH"
       source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
+      autoload -Uz edit-command-line
+      zle -N edit-command-line
+      zvm_after_init_commands+=("bindkey '^X^E' edit-command-line")
     '';
   };
 
@@ -200,6 +203,7 @@
    yq
 
    cachix
+   worktrunk
   ];
 
   home.file.backgrounds.source = ../backgrounds;
