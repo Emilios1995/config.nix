@@ -403,25 +403,8 @@ end, { range = true })
 vim.keymap.set("n", "<leader>f", "<CMD>Format<CR>", { desc = "Format" })
 
 
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.tailwind = {
-  install_info = {
-    url = "~/dev/tree-sitter-tailwind", -- local path or git repo
-    -- optional entries:
-    -- branch = "main", -- default branch in case of git repo if different from master
-    generate_requires_npm = false,          -- if stand-alone parser without npm dependencies
-    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
-  },
-}
-
--- parser_config.org = {
---   install_info = {
---     url = 'https://github.com/milisims/tree-sitter-org',
---     revision = 'next',
---     files = { 'src/parser.c', 'src/scanner.c' },
---   },
---   filetype = 'org',
--- }
+-- tailwind grammar is provided by tree-sitter-grammars.tree-sitter-tailwind in flake;
+-- no in-vim parser registration needed under nvim-treesitter main branch.
 
 require('orgmode').setup({
   org_agenda_files = '~/orgfiles/**/*',

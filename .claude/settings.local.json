@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nix-env -qaP -A nixpkgs.tmuxPlugins)",
+      "Bash(gh api:*)",
+      "Read(//nix/store/**)",
+      "Read(//Users/emilio/**)",
+      "Bash(bun install:*)"
+    ]
+  }
+}

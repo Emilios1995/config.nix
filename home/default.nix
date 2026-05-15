@@ -6,9 +6,9 @@
     ./neovim
     ./tmux.nix
     ./starship
-    ./aider
     ./pgcli
     ./cachix.nix
+    ./worktrunk.nix
   ];
 
   home.stateVersion = "23.11";
@@ -99,6 +99,18 @@
         mods = 'CTRL',
         action = wezterm.action.EmitEvent 'toggle-background',
       },
+      {
+        key = 'E',
+        mods = 'CMD|SHIFT',
+        action = wezterm.action.PromptInputLine {
+          description = 'Enter new name for tab',
+          action = wezterm.action_callback(function(window, pane, line)
+            if line then
+              window:active_tab():set_title(line)
+            end
+          end),
+        },
+      },
     }
 
     return config
@@ -152,8 +164,8 @@
     google-cloud-sql-proxy
     pgcli
 
-    nodePackages.typescript
-    nodePackages.pnpm
+    typescript
+    pnpm
     nodejs
     yarn
 
@@ -174,7 +186,6 @@
 
     comma
     manix
-    nodePackages.node2nix
 
     nix-output-monitor
 
@@ -194,8 +205,6 @@
 
     sesh
 
-    aider-chat
-
    gmp
    pkgconf
 
@@ -203,7 +212,6 @@
    yq
 
    cachix
-   worktrunk
   ];
 
   home.file.backgrounds.source = ../backgrounds;

@@ -1,16 +1,16 @@
 { config, lib, pkgs, ... }:
 
 let
-  brewBinPrefix = if pkgs.system == "aarch64-darwin" then "/opt/homebrew/bin" else "/usr/local/bin";
+  brewPrefix = if pkgs.system == "aarch64-darwin" then "/opt/homebrew" else "/usr/local";
 in
 
 {
   programs.zsh.shellInit = ''
-    eval "$(${brewBinPrefix}/brew shellenv)"
+    eval "$(${brewPrefix}/bin/brew shellenv)"
   '';
 
   homebrew.enable = true;
-  homebrew.brewPrefix = brewBinPrefix;
+  homebrew.prefix = brewPrefix;
   homebrew.onActivation.autoUpdate = true;
   homebrew.onActivation.cleanup = "zap";
 

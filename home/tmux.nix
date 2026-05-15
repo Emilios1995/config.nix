@@ -37,7 +37,8 @@ in
     ];
 
     extraConfig = ''
-             set-option -g automatic-rename off
+             set-option -g automatic-rename on
+             set-option -g automatic-rename-format '#{?#{==:#{pane_current_command},zsh},#{b:pane_current_path},#{pane_current_command}}'
              set -as terminal-features ",xterm-256color:RGB"
              bind -T copy-mode-vi 'v' send -X begin-selection
              bind -T copy-mode-vi 'y' send -X copy-selection-and-cancel

@@ -69,10 +69,10 @@ with lib;
     [pkgs.pkgs-23-11.lua-language-server] ++
     (with pkgs; [
       nil #nix ls
-      nodePackages.typescript-language-server
-      nodePackages."@tailwindcss/language-server"
-      #nodePackages.graphql-language-service-cli
-      #nodePackages.pyright
+      typescript-language-server
+      tailwindcss-language-server
+      #graphql-language-service-cli
+      #pyright
       sg-nvim
     ]);
 

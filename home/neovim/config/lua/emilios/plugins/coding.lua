@@ -1,58 +1,17 @@
-require('nvim-treesitter.configs').setup {
-  ensure_installed = {},
+-- nvim-treesitter v1.0+ ("main" branch): no more configs.setup.
+-- Enable highlighting per-buffer; playground is replaced by built-in :InspectTree.
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})
 
-  highlight = {
-    enable = true,
-  },
-
-  textobjects = {
-    move = {
-      enable = true,
-      set_jumps = true,
-      goto_next_start = {
-        ["]f"] = "@function.outer"
-      },
-      goto_next_end = {
-        ["]F"] = "@function.outer"
-      },
-      goto_previous_start = {
-        ["[f"] = "@function.outer"
-      },
-      goto_previous_end = {
-        ["[F"] = "@function.outer"
-      }
-    }
-  },
-
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "<C-space>",
-      node_incremental = "<C-space>",
-      scope_incremental = false,
-      node_decremental = "<bs>"
-    }
-  },
-
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-    keybindings = {
-      toggle_query_editor = 'o',
-      toggle_hl_groups = 'i',
-      toggle_injected_languages = 't',
-      toggle_anonymous_nodes = 'a',
-      toggle_language_display = 'I',
-      focus_language = 'f',
-      unfocus_language = 'F',
-      update = 'R',
-      goto_node = '<cr>',
-      show_help = '?',
-    },
-  }
-}
+-- textobjects move, new API
+local ts_move = require('nvim-treesitter-textobjects.move')
+vim.keymap.set({ 'n', 'x', 'o' }, ']f', function() ts_move.goto_next_start('@function.outer', 'textobjects') end)
+vim.keymap.set({ 'n', 'x', 'o' }, ']F', function() ts_move.goto_next_end('@function.outer', 'textobjects') end)
+vim.keymap.set({ 'n', 'x', 'o' }, '[f', function() ts_move.goto_previous_start('@function.outer', 'textobjects') end)
+vim.keymap.set({ 'n', 'x', 'o' }, '[F', function() ts_move.goto_previous_end('@function.outer', 'textobjects') end)
 
 local mini_ai = require('mini.ai')
 mini_ai.setup {

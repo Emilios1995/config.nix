@@ -225,12 +225,6 @@
           };
         };
 
-        worktrunk = final: prev: {
-          worktrunk = final.callPackage (self + "/derivations/worktrunk.nix") {
-            inherit (final) lib rustPlatform fetchFromGitHub;
-          };
-        };
-
         tree-sitter-tailwind = final: prev: {
           tree-sitter-tailwind = inputs.tree-sitter-tailwind.packages.${prev.system}.default;
         };
