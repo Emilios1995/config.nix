@@ -1,4 +1,4 @@
-{  pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -15,7 +15,9 @@
 
   programs.zsh = {
     enable = true;
-    autosuggestion = { enable = true;};
+    autosuggestion = {
+      enable = true;
+    };
     enableCompletion = true;
     syntaxHighlighting = {
       enable = true;
@@ -47,73 +49,73 @@
     enable = true;
     enableZshIntegration = true;
     extraConfig = ''
-     -- Pull in the wezterm API
-    local wezterm = require 'wezterm'
+       -- Pull in the wezterm API
+      local wezterm = require 'wezterm'
 
-    local config = {}
-    config = wezterm.config_builder()
+      local config = {}
+      config = wezterm.config_builder()
 
-    config.color_scheme = 'Alabaster'
+      config.color_scheme = 'Alabaster'
 
-    config.use_fancy_tab_bar = false
-    config.tab_bar_at_bottom = true
-    config.hide_tab_bar_if_only_one_tab = true
+      config.use_fancy_tab_bar = false
+      config.tab_bar_at_bottom = true
+      config.hide_tab_bar_if_only_one_tab = true
 
-    -- config.use_cap_height_to_scale_fallback_fonts = true;
-    config.font = wezterm.font ("PragmataPro Mono Liga", {weight = 'Medium'})
-    config.line_height = 1.5
-    config.font_size = 15
-    config.front_end = "WebGpu"
-    config.audible_bell = "Disabled"
+      -- config.use_cap_height_to_scale_fallback_fonts = true;
+      config.font = wezterm.font ("PragmataPro Mono Liga", {weight = 'Medium'})
+      config.line_height = 1.5
+      config.font_size = 15
+      config.front_end = "WebGpu"
+      config.audible_bell = "Disabled"
 
-    config.background = {
-      {
-        source = {
-          File = "Users/emilio/backgrounds/gravity.jpeg",
+      config.background = {
+        {
+          source = {
+            File = "Users/emilio/backgrounds/gravity.jpeg",
+          },
+          width = '100%',
         },
-        width = '100%',
-      },
-      {
-        source = {
-          Color = "#191724",
-        },
-        width = '100%',
-        height = '100%',
-        opacity = 0.94
+        {
+          source = {
+            Color = "#191724",
+          },
+          width = '100%',
+          height = '100%',
+          opacity = 0.94
+        }
       }
-    }
 
-    wezterm.on('toggle-background', function(window, pane)
-      local overrides = window:get_config_overrides() or {}
-      if not overrides.background then
-        overrides.background = {}
-      else
-        overrides.background = nil
-      end
-      window:set_config_overrides(overrides)
-    end)
+      wezterm.on('toggle-background', function(window, pane)
+        local overrides = window:get_config_overrides() or {}
+        if not overrides.background then
+          overrides.background = {}
+        else
+          overrides.background = nil
+        end
+        window:set_config_overrides(overrides)
+      end)
 
-    config.keys = {
-      {
-        key = 'I',
-        mods = 'CTRL',
-        action = wezterm.action.EmitEvent 'toggle-background',
-      },
-      {
-        key = 'E',
-        mods = 'CMD|SHIFT',
-        action = wezterm.action.PromptInputLine {
-          description = 'Enter new name for tab',
-          action = wezterm.action_callback(function(window, pane, line)
-            if line then
-              window:active_tab():set_title(line)
-            end
-          end),
+      config.keys = {
+        {
+          key = 'I',
+          mods = 'CTRL',
+          action = wezterm.action.EmitEvent 'toggle-background',
         },
-      },
-    }
+        {
+          key = 'E',
+          mods = 'CMD|SHIFT',
+          action = wezterm.action.PromptInputLine {
+            description = 'Enter new name for tab',
+            action = wezterm.action_callback(function(window, pane, line)
+              if line then
+                window:active_tab():set_title(line)
+              end
+            end),
+          },
+        },
+      }
 
-    return config
+      return config
     '';
   };
 
@@ -122,8 +124,10 @@
     config.theme = "Solarized (dark)";
   };
 
-  programs.fzf = 
-    let fd = "${pkgs.fd}/bin/fd"; in
+  programs.fzf =
+    let
+      fd = "${pkgs.fd}/bin/fd";
+    in
     rec {
       enable = true;
       enableZshIntegration = true;
@@ -134,15 +138,14 @@
         "--preview '${pkgs.bat}/bin/bat --color=always --plain --line-range=:200 {}'"
       ];
       changeDirWidgetCommand = "${fd} --type d";
-      changeDirWidgetOptions =
-        [ "--preview '${pkgs.tree}/bin/tree -C {} | head -200'" ];
+      changeDirWidgetOptions = [ "--preview '${pkgs.tree}/bin/tree -C {} | head -200'" ];
       historyWidgetOptions = [ ];
     };
 
-    programs.zoxide = {
-      enable = true;
-      enableZshIntegration = true;
-    };
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.java.enable = true;
 
@@ -159,7 +162,14 @@
 
     just
     postgresql_14
-    (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.gke-gcloud-auth-plugin google-cloud-sdk.components.pubsub-emulator ]))
+    (google-cloud-sdk.withExtraComponents (
+      with google-cloud-sdk.components;
+      [
+        cloud_sql_proxy
+        gke-gcloud-auth-plugin
+        pubsub-emulator
+      ]
+    ))
     kubectl
     google-cloud-sql-proxy
     pgcli
@@ -181,7 +191,6 @@
     ocamlPackages.ocaml-lsp
     #ocamlPackages.ocamlformat_0_23_0
 
-
     cargo
 
     comma
@@ -189,7 +198,7 @@
 
     nix-output-monitor
 
-   # ollama: commented since the available version is out of date
+    # ollama: commented since the available version is out of date
     bun
     lua
     hurl
@@ -205,13 +214,13 @@
 
     sesh
 
-   gmp
-   pkgconf
+    gmp
+    pkgconf
 
-   claude-code
-   yq
+    claude-code
+    yq
 
-   cachix
+    cachix
   ];
 
   home.file.backgrounds.source = ../backgrounds;
@@ -219,10 +228,10 @@
   programs.vscode = {
     enable = true;
     profiles.default.extensions = with pkgs.vscode-marketplace; [
-       gabrielnordeborn.vscode-rescript-relay
-       chenglou92.rescript-vscode
-       github.copilot
-       github.copilot-chat
+      gabrielnordeborn.vscode-rescript-relay
+      chenglou92.rescript-vscode
+      github.copilot
+      github.copilot-chat
     ];
   };
 

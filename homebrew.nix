@@ -23,6 +23,7 @@ in
     "dbus"
     "icu4c@77"
     "zstd"
+    # "openclaw/tap/wacli"
   ];
 
   homebrew.taps = [
@@ -30,6 +31,7 @@ in
     "homebrew/services"
     "txn2/tap"
     "withgraphite/tap"
+    # "openclaw/tap"
   ];
 
   # If an app isn't available in the Mac App Store install the Homebrew Cask.

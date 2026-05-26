@@ -22,7 +22,7 @@
 ;; Type synonyms
 (haskell
   declarations: (declarations
-    (type_synomym
+    (type_synonym
       name: (name) @AlabasterDefinition)))
 
 ;; Newtype declarations
