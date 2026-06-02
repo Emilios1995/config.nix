@@ -52,6 +52,8 @@
       flake = false;
     };
 
+    googleworkspace-cli.url = "github:googleworkspace/cli";
+
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";

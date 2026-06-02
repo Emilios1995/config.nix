@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
@@ -221,6 +221,8 @@
     yq
 
     cachix
+
+    inputs.googleworkspace-cli.packages.${pkgs.system}.default
   ];
 
   home.file.backgrounds.source = ../backgrounds;
