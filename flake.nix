@@ -54,6 +54,9 @@
 
     googleworkspace-cli.url = "github:googleworkspace/cli";
 
+    pi.url = "github:lukasl-dev/pi.nix";
+    pi.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
@@ -287,6 +290,9 @@
         };
 
         nvim-nightly = inputs.neovim-nightly-overlay.overlays.default;
+
+        # Provides pkgs.pi-coding-agent
+        pi = inputs.pi.overlays.default;
       };
 
     }

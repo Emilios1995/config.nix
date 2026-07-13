@@ -3,8 +3,14 @@
   home.packages = [ pkgs.cachix ];
 
   nix.settings = {
-    extra-substituters = [ "https://tan.cachix.org" ];
-    extra-trusted-public-keys = [ "tan.cachix.org-1:y9VYkIo4aZD4oK1wM/mYppPK0Pt//FMmTIyPcT6sbcs=" ];
+    extra-substituters = [
+      "https://tan.cachix.org"
+      "https://pi.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "tan.cachix.org-1:y9VYkIo4aZD4oK1wM/mYppPK0Pt//FMmTIyPcT6sbcs="
+      "pi.cachix.org-1:lGeoGJaZ5ZDabuRzkcD5EBTNnDM4HJ1vqeOxlWk1Flk="
+    ];
     netrc-file = age.secrets.nix-netrc.path;
   };
    

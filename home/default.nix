@@ -223,6 +223,9 @@
     cachix
 
     inputs.googleworkspace-cli.packages.${pkgs.system}.default
+    # lowPrio: pi bundles its own typescript under lib/node_modules, which
+    # collides with the standalone `typescript` above in the profile buildEnv.
+    (lib.lowPrio pi-coding-agent)
   ];
 
   home.file.backgrounds.source = ../backgrounds;
