@@ -32,7 +32,7 @@
       };
       rerere.enabled = true;
       push = {
-        default = "tracking";
+        default = "simple";
         followTags = true;
       };
       apply.whitespace = "nowarn";
