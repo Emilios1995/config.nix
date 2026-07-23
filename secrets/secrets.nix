@@ -8,4 +8,5 @@ in
   "pgpass.age".publicKeys = [macbookPro macStudio];
   "cachix-authtoken.dhall.age".publicKeys = [macbookPro macStudio];
   "nix-netrc.age".publicKeys = [macbookPro macStudio];
+  "github-token.age".publicKeys = [macbookPro macStudio];
 }
