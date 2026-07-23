@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 {
   # Nix configuration ------------------------------------------------------------------------------
   imports = [
@@ -34,6 +34,12 @@
     ];
   };
 
+  # The included file (decrypted by agenix) contains:
+  #   access-tokens = github.com=ghp_...
+  # `!include` is optional, so a rebuild before the secret is decrypted won't fail.
+  nix.extraOptions = ''
+    !include ${config.age.secrets.github-token.path}
+  '';
 
   programs.nix-index.enable = true;
 
@@ -86,6 +92,15 @@
     nix-netrc = {
       file = ./secrets/nix-netrc.age;
       mode = "700";
+      owner = "emilio";
+    };
+    github-token = {
+      file = ./secrets/github-token.age;
+      # Readable by the user: flake inputs are fetched during evaluation by the
+      # user's `nix` process, not the root daemon, so `!include`-ing this into
+      # nix.conf only helps if the user can read it. Without this the private
+      # topagentnetwork/* github: inputs fail to auth and GitHub 404s them.
+      mode = "600";
       owner = "emilio";
     };
   };
