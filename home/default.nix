@@ -13,6 +13,14 @@
 
   home.stateVersion = "23.11";
 
+  home.sessionVariables = {
+    NPM_CONFIG_PREFIX = "$HOME/.cache/npm/global";
+  };
+
+  home.sessionPath = [
+    "$HOME/.cache/npm/global/bin"
+  ];
+
   programs.zsh = {
     enable = true;
     autosuggestion = {
