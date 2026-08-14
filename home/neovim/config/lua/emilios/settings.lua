@@ -50,8 +50,18 @@ vim.cmd('set background=light')
 
 o.termguicolors = true
 
-vim.api.nvim_set_hl(0, "NormalNC", { guibg = NONE, ctermbg = NONE })
-vim.api.nvim_set_hl(0, "Normal", { guibg = NONE, ctermbg = NONE })
+-- transparent background: drop the bg but keep the colorscheme's fg.
+-- (nvim_set_hl replaces the whole group, so we have to read it back first --
+-- clearing Normal's fg leaves plugins like diffview with no color to derive
+-- their file names from, and they fall back to white.)
+local function transparent_bg(group)
+  local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+  hl.bg, hl.ctermbg = nil, nil
+  vim.api.nvim_set_hl(0, group, hl)
+end
+
+transparent_bg("Normal")
+transparent_bg("NormalNC")
 
 vim.cmd("set cmdheight=0")
 -- General keymaps

@@ -132,6 +132,8 @@
             agenix.darwinModules.default
             # Main `nix-darwin` config
             ./configuration.nix
+            # Personal-tailnet sidecar (Mac Studio only)
+            ./tailscale-personal.nix
             { networking.hostName = "emilios-mac-studio"; }
             # `home-manager` module
             home-manager.darwinModules.home-manager

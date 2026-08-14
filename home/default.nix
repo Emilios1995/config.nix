@@ -9,6 +9,7 @@
     ./pgcli
     ./cachix.nix
     ./worktrunk.nix
+    ./ssh.nix
   ];
 
   home.stateVersion = "23.11";
