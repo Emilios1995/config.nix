@@ -4,25 +4,19 @@
 
   programs.git = {
     enable = true;
-    userEmail = "emilios1995@gmail.com";
-    userName = "Emilio Srougo";
-
-    delta = {
-      enable = true;
-      options = {
-        dark = false;
-        syntax-theme = "Solarized (light)";
-      };
-    };
     lfs.enable = true;
 
 
-    extraConfig = {
+    settings = {
+      user = {
+        email = "emilios1995@gmail.com";
+        name = "Emilio Srougo";
+      };
       alias = {
         dft = "difftool";
       };
       credential.helper = 
-        if pkgs.stdenvNoCC.isDarwin then 
+        if pkgs.stdenvNoCC.hostPlatform.isDarwin then 
           "osxkeychain"
         else
           "cache --timeout=1000000000";
@@ -85,6 +79,15 @@
     ];
   };
 
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      dark = false;
+      syntax-theme = "Solarized (light)";
+    };
+  };
+
   programs.gh.enable = true;
   programs.gh.settings.git_protocol = "ssh";
 
@@ -92,10 +95,10 @@
   programs.lazygit = {
     enable = true;
     settings = {
-      git.pagers = [
+      git.diffRenderers = [
         {
           colorArg = "always";
-          pager = "delta --syntax-theme OneHalfLight --paging=never";
+          command = "delta --syntax-theme OneHalfLight --paging=never";
         }
       ];
     };

@@ -4,6 +4,8 @@ with lib;
   programs.neovim = {
     enable = true;
     vimAlias = true;
+    withRuby = false;
+    withPython3 = false;
     extraConfig = ''
       set runtimepath+=~/.config/nix/home/neovim/config
       lua require 'emilios.init'

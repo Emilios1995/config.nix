@@ -6,10 +6,12 @@
     extra-substituters = [
       "https://tan.cachix.org"
       "https://pi.cachix.org"
+      "https://shinzui.cachix.org"
     ];
     extra-trusted-public-keys = [
       "tan.cachix.org-1:y9VYkIo4aZD4oK1wM/mYppPK0Pt//FMmTIyPcT6sbcs="
       "pi.cachix.org-1:lGeoGJaZ5ZDabuRzkcD5EBTNnDM4HJ1vqeOxlWk1Flk="
+      "shinzui.cachix.org-1:QEmAoJrA9WwLP0uxfDgktLi2BRrcvQQWdz8NzcMg4/E="
     ];
     netrc-file = age.secrets.nix-netrc.path;
   };

@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 
 {
   imports = [
@@ -10,6 +10,7 @@
     ./cachix.nix
     ./worktrunk.nix
     ./ssh.nix
+    ./okf.nix
   ];
 
   home.stateVersion = "23.11";
@@ -38,13 +39,18 @@
         file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
     ];
-    initExtra = ''
-      export PATH="$HOME/.local/bin:$PATH"
-      source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
-      autoload -Uz edit-command-line
-      zle -N edit-command-line
-      zvm_after_init_commands+=("bindkey '^X^E' edit-command-line")
-    '';
+    initContent = lib.mkMerge [
+      (lib.mkOrder 550 ''
+        fpath=(~/.zfunc $fpath)
+      '')
+      ''
+        export PATH="$HOME/.local/bin:$PATH"
+        source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
+        autoload -Uz edit-command-line
+        zle -N edit-command-line
+        zvm_after_init_commands+=("bindkey '^X^E' edit-command-line")
+      ''
+    ];
   };
 
   programs.direnv.enable = true;
@@ -142,13 +148,17 @@
       enableZshIntegration = true;
       defaultCommand = "${fd} --type f";
       defaultOptions = [ "--height 50%" ];
-      fileWidgetCommand = "${defaultCommand}";
-      fileWidgetOptions = [
-        "--preview '${pkgs.bat}/bin/bat --color=always --plain --line-range=:200 {}'"
-      ];
-      changeDirWidgetCommand = "${fd} --type d";
-      changeDirWidgetOptions = [ "--preview '${pkgs.tree}/bin/tree -C {} | head -200'" ];
-      historyWidgetOptions = [ ];
+      fileWidget = {
+        command = "${defaultCommand}";
+        options = [
+          "--preview '${pkgs.bat}/bin/bat --color=always --plain --line-range=:200 {}'"
+        ];
+      };
+      changeDirWidget = {
+        command = "${fd} --type d";
+        options = [ "--preview '${pkgs.tree}/bin/tree -C {} | head -200'" ];
+      };
+      historyWidget.options = [ ];
     };
 
   programs.zoxide = {
@@ -174,7 +184,6 @@
     (google-cloud-sdk.withExtraComponents (
       with google-cloud-sdk.components;
       [
-        cloud_sql_proxy
         gke-gcloud-auth-plugin
         pubsub-emulator
       ]
@@ -231,7 +240,7 @@
 
     cachix
 
-    inputs.googleworkspace-cli.packages.${pkgs.system}.default
+    inputs.googleworkspace-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
     # lowPrio: pi bundles its own typescript under lib/node_modules, which
     # collides with the standalone `typescript` above in the profile buildEnv.
     (lib.lowPrio pi-coding-agent)

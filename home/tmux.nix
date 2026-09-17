@@ -44,6 +44,7 @@ in
              bind -T copy-mode-vi 'y' send -X copy-selection-and-cancel
              bind-key G new-window -n lazygit -c "#{pane_current_path}" direnv exec . lazygit
              bind-key A switch-client -l
+             bind-key s choose-tree -Zs -O time
              set -g default-command '$SHELL'
             bind-key "T" run-shell "sesh connect \"$(
             sesh list --icons | fzf-tmux -p 80%,70% \

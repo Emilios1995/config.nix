@@ -57,6 +57,8 @@
     pi.url = "github:lukasl-dev/pi.nix";
     pi.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
+    okf.url = "github:shinzui/okf";
+
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
@@ -207,10 +209,20 @@
         # Regularly updated nvim plugins
         neovim-nix = inputs.nixneovimplugins.overlays.default;
 
+        # nixpkgs now runs neovimRequireCheckHook on every vim plugin, but
+        # vimExtraPlugins doesn't declare inter-plugin dependencies (e.g.
+        # cmp-* sources need nvim-cmp), so the checks fail. Skip them.
+        neovim-nix-no-require-check = final: prev: {
+          vimExtraPlugins = prev.lib.mapAttrs (
+            _: plugin:
+            if prev.lib.isDerivation plugin then plugin.overrideAttrs { doCheck = false; } else plugin
+          ) prev.vimExtraPlugins;
+        };
+
         # Overlay useful on Macs with Apple Silicon
         apple-silicon =
           final: prev:
-          optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+          optionalAttrs (prev.stdenv.hostPlatform.system == "aarch64-darwin") {
             # Add access to x86 packages system is running Apple Silicon
             pkgs-x86 = import inputs.nixpkgs-unstable {
               system = "x86_64-darwin";
@@ -220,20 +232,20 @@
 
         pkgs-23-11 = _: prev: {
           pkgs-23-11 = import inputs.nixpkgs-23-11 {
-            inherit (prev.stdenv) system;
+            inherit (prev.stdenv.hostPlatform) system;
             inherit (nixpkgsConfig) config;
           };
         };
 
         pkgs-23-05 = _: prev: {
           pkgs-23-05 = import inputs.nixpkgs-23-05 {
-            inherit (prev.stdenv) system;
+            inherit (prev.stdenv.hostPlatform) system;
             inherit (nixpkgsConfig) config;
           };
         };
 
         tree-sitter-tailwind = final: prev: {
-          tree-sitter-tailwind = inputs.tree-sitter-tailwind.packages.${prev.system}.default;
+          tree-sitter-tailwind = inputs.tree-sitter-tailwind.packages.${prev.stdenv.hostPlatform.system}.default;
         };
 
         nvim = final: prev: {
@@ -244,7 +256,7 @@
               #   version = inputs.tree-sitter-rescript.lastModifiedDate;
               #   src = inputs.tree-sitter-rescript;
               # };
-              sg-nvim = inputs.sg-nvim.packages.${prev.system}.sg-nvim;
+              sg-nvim = inputs.sg-nvim.packages.${prev.stdenv.hostPlatform.system}.sg-nvim;
               alabaster-nvim = final.vimUtils.buildVimPlugin {
                 pname = "alabaster-nvim";
                 version = inputs.alabaster-nvim.lastModifiedDate;
@@ -271,7 +283,7 @@
         };
 
         sg-nvim = final: prev: {
-          sg-nvim = inputs.sg-nvim.packages.${prev.system}.default;
+          sg-nvim = inputs.sg-nvim.packages.${prev.stdenv.hostPlatform.system}.default;
         };
 
         tmux = final: prev: {
@@ -295,6 +307,28 @@
 
         # Provides pkgs.pi-coding-agent
         pi = inputs.pi.overlays.default;
+
+        # nixpkgs folded typescript-go into typescript (7.x, whose `tsc` is the
+        # Go compiler), but pi.nix still asks for typescript-go. Provide a shim
+        # exposing `tsgo` until upstream catches up.
+        pi-typescript-go = final: prev: {
+          pi-coding-agent = prev.pi-coding-agent.override {
+            typescript-go = prev.runCommand "typescript-go-shim" { } ''
+              mkdir -p $out/bin
+              ln -s ${prev.typescript}/bin/tsc $out/bin/tsgo
+            '';
+          };
+        };
+
+        # Provides a bin-only pkgs.okf. The upstream Haskell package also
+        # exposes lib/, which collides with other Haskell packages in the
+        # Home Manager profile.
+        okf = final: prev: {
+          okf = prev.runCommand "okf" { } ''
+            mkdir -p $out
+            ln -s ${inputs.okf.packages.${prev.stdenv.hostPlatform.system}.default}/bin $out/bin
+          '';
+        };
       };
 
     }

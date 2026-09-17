@@ -12,14 +12,14 @@
     # ownership of the file. HM emits Include first, ahead of all match blocks.
     includes = [ "/Users/emilio/.colima/ssh_config" ];
 
-    matchBlocks.desk = {
+    settings.desk = {
       # Personal-tailnet MagicDNS name. NOT the work tailnet, which resolves this
       # same machine as emilios-mac-studio.tailb3be00.ts.net.
-      hostname = "emilios-mac-studio.tail6bc754.ts.net";
-      user = "emilio";
+      HostName = "emilios-mac-studio.tail6bc754.ts.net";
+      User = "emilio";
       # Survive lid closes and network switches instead of hanging dead.
-      serverAliveInterval = 30;
-      serverAliveCountMax = 6;
+      ServerAliveInterval = 30;
+      ServerAliveCountMax = 6;
     };
   };
 

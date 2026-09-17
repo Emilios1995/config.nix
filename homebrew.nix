@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  brewPrefix = if pkgs.system == "aarch64-darwin" then "/opt/homebrew" else "/usr/local";
+  brewPrefix = if pkgs.stdenv.hostPlatform.system == "aarch64-darwin" then "/opt/homebrew" else "/usr/local";
 in
 
 {
@@ -12,7 +12,21 @@ in
   homebrew.enable = true;
   homebrew.prefix = brewPrefix;
   homebrew.onActivation.autoUpdate = true;
+  homebrew.onActivation.upgrade = true;
   homebrew.onActivation.cleanup = "zap";
+
+  # Homebrew 6 requires third-party formulae to be trusted before `brew bundle`
+  # can inspect or install them. Run this immediately before nix-darwin's
+  # Homebrew activation so rebuilds do not depend on mutable trust state.
+  system.activationScripts.homebrew.text = lib.mkBefore ''
+    if sudo --user=${lib.escapeShellArg config.homebrew.user} --set-home \
+      ${brewPrefix}/bin/brew command trust >/dev/null 2>&1; then
+      sudo --user=${lib.escapeShellArg config.homebrew.user} --set-home \
+        ${brewPrefix}/bin/brew trust --formula \
+          txn2/tap/kubefwd \
+          withgraphite/tap/graphite
+    fi
+  '';
 
   homebrew.brews = [
     "watchman"
