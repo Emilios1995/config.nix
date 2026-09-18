@@ -17,6 +17,10 @@
 
   home.sessionVariables = {
     NPM_CONFIG_PREFIX = "$HOME/.cache/npm/global";
+    # mosh-server refuses to start without a UTF-8 locale, and mosh forwards
+    # these from the client to the server (`mosh-server new -l ...`).
+    LANG = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
   };
 
   home.sessionPath = [
@@ -174,6 +178,7 @@
     curl
     wget
     ripgrep
+    mosh
     jq
     fd
     ranger

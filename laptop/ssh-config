@@ -1,0 +1,9 @@
+# ~/.ssh/config on the laptop. chmod 600 after copying.
+Host desk
+    # Personal-tailnet MagicDNS name. NOT the work tailnet, which resolves this
+    # same machine as emilios-mac-studio.tailb3be00.ts.net.
+    HostName emilios-mac-studio.tail6bc754.ts.net
+    User emilio
+    # Survive lid closes and network switches instead of hanging dead.
+    ServerAliveInterval 30
+    ServerAliveCountMax 6

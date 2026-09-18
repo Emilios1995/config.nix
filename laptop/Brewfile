@@ -1,0 +1,4 @@
+# Laptop (thin client) only. The Studio's Homebrew config lives in ../homebrew.nix.
+cask "tailscale-app"   # plain "tailscale" now redirects here
+cask "ghostty"         # needs macOS 13+; sets TERM=xterm-ghostty, see README step 5
+brew "mosh"            # no official standalone macOS build, hence Homebrew

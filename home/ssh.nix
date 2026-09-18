@@ -23,5 +23,15 @@
     };
   };
 
-  programs.zsh.shellAliases.desk = "ssh -t desk 'tmux new -A -s main'";
+  # mosh reuses the `desk` block above for its ssh handshake, then talks UDP
+  # directly. That UDP survives lid closes and network changes, which plain ssh
+  # does not.
+  #
+  # --server needs an absolute path: mosh starts mosh-server over a
+  # non-interactive ssh shell, whose PATH does not include the Nix profile. This
+  # symlink is stable across rebuilds; a /nix/store path would not be.
+  programs.zsh.shellAliases = {
+    desk = "mosh --server=/etc/profiles/per-user/emilio/bin/mosh-server desk -- tmux new -A -s main";
+    sshdesk = "ssh -t desk 'tmux new -A -s main'";
+  };
 }

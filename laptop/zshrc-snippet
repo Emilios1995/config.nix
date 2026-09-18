@@ -1,0 +1,8 @@
+# Append to ~/.zshrc on the laptop.
+
+# mosh reuses the `desk` block in ~/.ssh/config for its ssh handshake, then talks
+# UDP directly — that UDP survives lid closes and network changes.
+alias desk="mosh --server=/etc/profiles/per-user/emilio/bin/mosh-server desk -- tmux new -A -s main"
+
+# Fallback when anything mosh-specific misbehaves.
+alias sshdesk="ssh -t desk 'tmux new -A -s main'"

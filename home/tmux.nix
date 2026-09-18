@@ -39,7 +39,16 @@ in
     extraConfig = ''
              set-option -g automatic-rename on
              set-option -g automatic-rename-format '#{?#{==:#{pane_current_command},zsh},#{b:pane_current_path},#{pane_current_command}}'
-             set -as terminal-features ",xterm-256color:RGB"
+             set -as terminal-features ",*:RGB"
+
+             # Copy straight to the *client* machine's clipboard, so a yank here
+             # can be pasted into a browser on the laptop.
+             #
+             # mosh relays OSC 52, but only with the literal "c" selector; tmux's
+             # default Ms sends an empty one, which mosh silently drops. The
+             # c%p1%.0s swallows tmux's selector argument and hardcodes c.
+             set -s set-clipboard on
+             set -sa terminal-overrides ",*:Ms=\033]52;c%p1%.0s;%p2%s\007"
              bind -T copy-mode-vi 'v' send -X begin-selection
              bind -T copy-mode-vi 'y' send -X copy-selection-and-cancel
              bind-key G new-window -n lazygit -c "#{pane_current_path}" direnv exec . lazygit
