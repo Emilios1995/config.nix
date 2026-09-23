@@ -56,22 +56,44 @@ infocmp -x | ssh desk -- tic -x -
 It lands in `~/.terminfo` on the Studio — outside the Nix store, so rebuilds leave
 it alone. Verify: `ssh desk infocmp xterm-ghostty > /dev/null && echo ok`.
 
-## 6. Aliases
+## 6. Fonts
+
+PragmataPro is paid and installed by hand — not via Nix, not via Homebrew. Copy it
+from the Studio, or Ghostty silently falls back to a default:
+
+```sh
+scp 'desk:Library/Fonts/PragmataPro*' ~/Library/Fonts/
+```
+
+Installed weights are Regular, Bold, Italic and Oblique; there is no Medium.
+
+## 7. Ghostty config
+
+```sh
+mkdir -p ~/.config/ghostty
+cp ghostty-config ~/.config/ghostty/config.ghostty
+ghostty +validate-config      # must report no diagnostics
+```
+
+Ported from the Studio's wezterm config; `ghostty-config` lists what was dropped
+and why. Fonts (step 6) must be in place first or it falls back silently.
+
+## 8. Aliases
 
 Append `zshrc-snippet` to `~/.zshrc`.
 
 The absolute `--server` path is not optional: mosh starts mosh-server through a
 non-interactive ssh shell, whose PATH does not include the Nix profile.
 
-## 7. Verify, in order
+## 9. Verify, in order
 
 1. `desk` connects and lands in tmux.
 2. Close the lid or toggle Wi-Fi, then reopen — the session resumes rather than
    dying. That is the whole reason for mosh.
 3. Copy: in tmux, `v` to select, `y` to yank, then Cmd+V into a laptop browser.
    Works via OSC 52 over mosh (see `../home/tmux.nix` for why the tmux `Ms`
-   override is needed). If it fails, add `clipboard-write = allow` to
-   `~/.config/ghostty/config` and reconnect.
+   override is needed). `clipboard-write = allow` is already in the Ghostty
+   config from step 7.
 
 ## When it breaks
 
