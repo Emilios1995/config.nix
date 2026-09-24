@@ -1,104 +1,104 @@
-# Laptop bootstrap
+# Laptop bootstrap (Omarchy)
 
-The MacBook is a thin client: a terminal, a tailnet, and a key. Everything else —
+The laptop is a thin client: a terminal, a tailnet, and a key. Everything else —
 tmux, shell, tooling — lives on the Mac Studio ("desk") and stays there. Nothing on
-the laptop is worth backing up, so wiping it costs one evening of nothing.
+the laptop is worth backing up.
 
-Nix is deliberately NOT used here. The laptop is x86, Nix broke on it, and a thin
-client does not need it. Homebrew covers the three things that must be local.
+It runs Omarchy (Arch + Hyprland), not macOS, and deliberately not Nix. Two
+packages are all it needs.
 
-Read this from the Studio while the laptop is bare.
+Run `omarchy version` first: 4.x defaults to the foot terminal, 3.x to Alacritty.
+That changes nothing below except which terminfo step 5 copies — the command is the
+same either way.
 
-## 1. Homebrew
+## 1. Tailscale
+
+Omarchy has this built in: menu → **Install > Service > Tailscale**. It installs the
+package, enables `tailscaled`, runs `tailscale up`, and sets `--operator=$USER` so
+the CLI works without sudo afterwards.
+
+Sign in as **emilios1995@gmail.com** — the personal tailnet, not the work one.
+`tailscale status` should list `emilios-mac-studio`.
+
+Leave DNS on **DHCP** (Setup > Network > DNS). Pinning Cloudflare/Google there
+rewrites `/etc/systemd/resolved.conf` and can fight MagicDNS, which is how the
+`desk` hostname resolves.
+
+## 2. mosh
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+omarchy pkg add mosh
 ```
 
-Installs the Xcode Command Line Tools first; slow. On Intel the prefix is
-`/usr/local`, so run the `brew shellenv` lines it prints at the end.
-
-## 2. Packages
-
-```sh
-brew bundle --file=Brewfile   # or: brew install --cask tailscale-app ghostty && brew install mosh
-```
-
-Launch Tailscale and sign in as **emilios1995@gmail.com** — the personal tailnet,
-not the work one. `emilios-mac-studio` should show up in its device list.
+Prefer this over raw pacman — it is Omarchy's own wrapper and checks the package
+actually registered. mosh is in Arch `extra`; Omarchy does not ship it.
 
 ## 3. SSH key
 
 ```sh
-ssh-keygen -t ed25519 -C "macbook"
-pbcopy < ~/.ssh/id_ed25519.pub
+ssh-keygen -t ed25519 -C "omarchy"
+wl-copy < ~/.ssh/id_ed25519.pub
 ```
 
-Then on the Studio, `pbpaste >> ~/.ssh/authorized_keys`.
+Then on the Studio: `pbpaste >> ~/.ssh/authorized_keys`.
+
+Omarchy has no ssh-agent convention — no unit, no `SSH_AUTH_SOCK` export. If
+retyping a passphrase gets old, set up `gcr-ssh-agent.socket` or a plain `ssh-agent`
+user unit yourself.
 
 ## 4. SSH config
 
 ```sh
-cp ssh-config ~/.ssh/config    # then check it over
+cp ssh-config ~/.ssh/config
 chmod 600 ~/.ssh/config
 ssh desk                       # must work before moving on
 ```
 
-## 5. Ghostty terminfo on the Studio
+The `ServerAlive*` lines are redundant on Omarchy, which already sets keepalives in
+`/etc/ssh/ssh_config.d/20-omarchy-keepalive.conf`. Harmless, and keeps the file
+portable.
 
-Ghostty sets `TERM=xterm-ghostty`, which the Studio's ncurses does not ship. Run
-this from the laptop, inside Ghostty:
+## 5. Terminfo on the Studio
+
+The Studio's ncurses knows nothing about `foot`. mosh passes `TERM` through, so
+without this you land in a session with a broken terminal. From the laptop, in the
+terminal you actually use:
 
 ```sh
 infocmp -x | ssh desk -- tic -x -
 ```
 
 It lands in `~/.terminfo` on the Studio — outside the Nix store, so rebuilds leave
-it alone. Verify: `ssh desk infocmp xterm-ghostty > /dev/null && echo ok`.
+it alone. Verify: `ssh desk infocmp $TERM > /dev/null && echo ok`.
 
-## 6. Fonts
+Omarchy's `shell-integration-features = ...,ssh-env` papers over this for plain
+`ssh`, but **not** for mosh, which it does not wrap.
 
-PragmataPro is paid and installed by hand — not via Nix, not via Homebrew. Copy it
-from the Studio, or Ghostty silently falls back to a default:
+## 6. Aliases
 
-```sh
-scp 'desk:Library/Fonts/PragmataPro*' ~/Library/Fonts/
-```
-
-Installed weights are Regular, Bold, Italic and Oblique; there is no Medium.
-
-## 7. Ghostty config
-
-```sh
-mkdir -p ~/.config/ghostty
-cp ghostty-config ~/.config/ghostty/config.ghostty
-ghostty +validate-config      # must report no diagnostics
-```
-
-Ported from the Studio's wezterm config; `ghostty-config` lists what was dropped
-and why. Fonts (step 6) must be in place first or it falls back silently.
-
-## 8. Aliases
-
-Append `zshrc-snippet` to `~/.zshrc`.
+Append `bashrc-snippet` to `~/.bashrc`.
 
 The absolute `--server` path is not optional: mosh starts mosh-server through a
 non-interactive ssh shell, whose PATH does not include the Nix profile.
 
-## 9. Verify, in order
+## 7. Verify, in order
 
 1. `desk` connects and lands in tmux.
-2. Close the lid or toggle Wi-Fi, then reopen — the session resumes rather than
+2. Close the lid or change networks, then reopen — the session resumes rather than
    dying. That is the whole reason for mosh.
-3. Copy: in tmux, `v` to select, `y` to yank, then Cmd+V into a laptop browser.
-   Works via OSC 52 over mosh (see `../home/tmux.nix` for why the tmux `Ms`
-   override is needed). `clipboard-write = allow` is already in the Ghostty
-   config from step 7.
+3. Copy: in tmux, `v` to select, `y` to yank, then paste into a laptop browser.
+   Works via OSC 52 (see `../home/tmux.nix` for why the tmux `Ms` override is
+   needed). To test the terminal's half alone:
+   `printf '\033]52;c;%s\a' "$(printf hello | base64)"`
+   If that puts "hello" on the clipboard, the terminal is fine and any failure is
+   tmux-side.
+
+Terminal copy/paste is `Ctrl+Shift+C/V`, or Omarchy's `Super+C/V`, which
+synthesizes those. Do not rebind either.
 
 ## When it breaks
 
 - `sshdesk` — plain ssh, bypasses everything mosh-specific.
 - Tailnet down: the Studio is on the LAN at `emilios-mac-studio.local`.
-- Before wiping the laptop again, confirm the Studio's personal-tailnet node has
-  key expiry disabled. If that key expires while the laptop is the only way in,
-  there is no way in.
+- The Studio's personal-tailnet node must have key expiry disabled. If that key
+  expires while the laptop is the only way in, there is no way in.
