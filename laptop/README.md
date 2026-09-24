@@ -33,30 +33,37 @@ omarchy pkg add mosh
 Prefer this over raw pacman — it is Omarchy's own wrapper and checks the package
 actually registered. mosh is in Arch `extra`; Omarchy does not ship it.
 
-## 3. SSH key
-
-```sh
-ssh-keygen -t ed25519 -C "omarchy"
-wl-copy < ~/.ssh/id_ed25519.pub
-```
-
-Then on the Studio: `pbpaste >> ~/.ssh/authorized_keys`.
-
-Omarchy has no ssh-agent convention — no unit, no `SSH_AUTH_SOCK` export. If
-retyping a passphrase gets old, set up `gcr-ssh-agent.socket` or a plain `ssh-agent`
-user unit yourself.
-
-## 4. SSH config
+## 3. SSH config
 
 ```sh
 cp ssh-config ~/.ssh/config
 chmod 600 ~/.ssh/config
-ssh desk                       # must work before moving on
+ssh desk    # password prompt is expected here; the key comes next
 ```
 
 The `ServerAlive*` lines are redundant on Omarchy, which already sets keepalives in
 `/etc/ssh/ssh_config.d/20-omarchy-keepalive.conf`. Harmless, and keeps the file
 portable.
+
+## 4. SSH key
+
+```sh
+ssh-keygen -t ed25519 -C "omarchy"
+ssh-copy-id desk
+```
+
+`ssh-copy-id` prompts for the Studio's account password and appends the key itself.
+The Studio allows password auth (`PasswordAuthentication` unset, `UsePAM yes`), which
+is what makes this work before any key exists.
+
+Do not try to move the key via the clipboard: `wl-copy` writes the laptop's Wayland
+clipboard and `pbpaste` reads the Mac's — different machines, nothing crosses. If
+`ssh-copy-id` is unavailable, read the `.pub` file out on the laptop and append it by
+hand while sitting at the Studio.
+
+Omarchy has no ssh-agent convention — no unit, no `SSH_AUTH_SOCK` export. If
+retyping a passphrase gets old, set up `gcr-ssh-agent.socket` or a plain `ssh-agent`
+user unit yourself.
 
 ## 5. Terminfo on the Studio
 
